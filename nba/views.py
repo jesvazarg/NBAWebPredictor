@@ -124,6 +124,7 @@ def player(request, player_id: str):
 
 def game_list(request, season_id: str = None, month: str = None):
     seasons = Season.objects.all()
+    months = []
     var_season = None
     var_month = None
     game_list = []
