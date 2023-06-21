@@ -89,7 +89,7 @@ DATABASES = {
         'NAME': 'nba',
         'USER': 'admin',
         'PASSWORD': 'nba-pred-tfg',
-        'HOST': 'localhost',
+        'HOST': 'nba.cjpc8inv461q.eu-west-3.rds.amazonaws.com',
         'PORT': '3306',
     }
 }
