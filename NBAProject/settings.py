@@ -87,8 +87,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'nba',
-        'USER': 'root',
-        'PASSWORD': '',
+        'USER': 'admin',
+        'PASSWORD': 'nba-pred-tfg',
         'HOST': 'localhost',
         'PORT': '3306',
     }
