@@ -1,0 +1,83 @@
+{% extends 'nba/base.html' %}
+
+{% block content %}
+<div  class="inblock">
+    <h3>Temporadas</h3>
+</div>
+<ul>
+    {% for s in seasons %}
+        {% if forloop.counter > 1 %}
+            |
+        {% endif %}
+        <a href="{% url 'game_list' season_id=s.id%}">{{s.name}}</a>
+    {% endfor %}
+</ul>
+<h3>Meses de la temporada {{var_season}}</h3>
+<ul>
+    {% for m in months %}
+        {% if forloop.counter > 1 %}
+            |
+        {% endif %}
+        <a href="{% url 'game_list' season_id=var_season.id month=m.month%}">{{m.month}}</a>
+    {% endfor %}
+</ul>
+
+<br>
+
+<h2>Partidos de {{var_month}} de {{var_season}}</h2>
+
+<table>
+    <tr>
+        <th scope="col"></th>
+        <th scope="col" title="Día">Día</th>
+        <th scope="col" title="Hora">Hora</th>
+        <th scope="col" title="Equipo visitante">Equipo visitante</th>
+        <th scope="col" title="Resultado">Resultado</th>
+        <th scope="col" title="Equipo local">Equipo local</th>
+        <th scope="col" title="Predicción">Predicción</th>
+    </tr>
+    {% for game in game_list %}
+        <tr>
+            <td><a href="{% url 'game' game_id=game.id %}">Ver partido</a></td>
+            {% if game.game_date is None %}
+                <td></td>
+            {% else %}
+                <td>{{game.game_date|date:"SHORT_DATE_FORMAT"}}</td>
+            {% endif %}
+
+            {% if game.game_time is None %}
+                <td></td>
+            {% else %}
+                <td>{{game.game_time}}</td>
+            {% endif %}
+
+            {% if game.visitor_point > game.home_point %}
+                <td><b>{{game.visitor_team.name}}</b></td>
+            {% else %}
+                <td>{{game.visitor_team.name}}</td>
+            {% endif %}
+
+            {% if game.visitor_point == 0 or game.home_point == 0 %}
+                <td></td>
+            {% elif game.visitor_point > game.home_point %}
+                <td><b>{{game.visitor_point}}</b> - {{game.home_point}}</td>
+            {% else %}
+                <td>{{game.visitor_point}} - <b>{{game.home_point}}</b></td>
+            {% endif %}
+
+            {% if game.home_point > game.visitor_point %}
+                <td><b>{{game.home_team.name}}</b></td>
+            {% else %}
+                <td>{{game.home_team.name}}</td>
+            {% endif %}
+
+            {% if game.prediction is None %}
+                <td></td>
+            {% else %}
+                <td>{{game.prediction}}</td>
+            {% endif %}
+        </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

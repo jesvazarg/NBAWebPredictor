@@ -1,0 +1,292 @@
+{% extends 'nba/base.html' %}
+
+{% block content %}
+<script>
+    visitor_point = 0;
+    home_point = 0
+</script>
+<div class="inblock">
+    <h2 class="text_center">{{game.visitor_team}} {{game.visitor_point}} - {{game.home_point}} {{game.home_team}}</h2>
+</div>
+
+<h1>Jugadas</h1>
+
+<table>
+    <caption> <h3>Primer Cuarto</h3> </caption>
+    <tr>
+
+        <th scope="col" title="Tiempo">Tiempo</th>
+        <th scope="col" title="Visitante">{{game.visitor_team}}</th>
+        <th scope="col" title="Resultado">Resultado</th>
+        <th scope="col" title="Local">{{game.home_team}}</th>
+    </tr>
+    {% for play_1 in quarter_1 %}
+    <tr>
+        <td>{{play_1.play_time.minute|stringformat:"02d"}}:{{play_1.play_time.second|stringformat:"02d"}}</td>
+
+        {% if play_1.team == game.visitor_team.id %}
+            <script>
+                var type = "{{play_1.type}}";
+                var hit = "{{play_1.hit}}";
+                if (hit == "True"){
+                    if (type == "tp"){
+                        visitor_point += 3;
+                    } else if (type == "dp"){
+                        visitor_point += 2;
+                    } else if (type == "ft"){
+                        visitor_point += 1;
+                    }
+               }
+            </script>
+            <td>{{play_1.text}}</td>
+        {% else %}
+            <script>
+                var type = "{{play_1.type}}";
+                var hit = "{{play_1.hit}}";
+                if (hit == "True"){
+                    if (type == "tp"){
+                        home_point += 3;
+                    } else if (type == "dp"){
+                        home_point += 2;
+                    } else if (type == "ft"){
+                        home_point += 1;
+                    }
+               }
+            </script>
+            <td></td>
+        {% endif %}
+        <td><script>document.write(visitor_point + " - " + home_point);</script></td>
+        {% if play_1.team == game.home_team.id %}
+            <td>{{play_1.text}}</td>
+        {% else %}
+            <td></td>
+        {% endif %}
+    </tr>
+    {% endfor %}
+</table>
+
+<br>
+
+<table>
+    <caption> <h3>Segundo Cuarto</h3> </caption>
+    <tr>
+        <th scope="col" title="Tiempo">Tiempo</th>
+        <th scope="col" title="Visitante">{{game.visitor_team}}</th>
+        <th scope="col" title="Resultado">Resultado</th>
+        <th scope="col" title="Local">{{game.home_team}}</th>
+    </tr>
+    {% for play_2 in quarter_2 %}
+    <tr>
+        <td>{{play_2.play_time.minute|stringformat:"02d"}}:{{play_2.play_time.second|stringformat:"02d"}}</td>
+
+        {% if play_2.team == game.visitor_team.id %}
+            <script>
+                var type = "{{play_2.type}}";
+                var hit = "{{play_2.hit}}";
+                if (hit == "True"){
+                    if (type == "tp"){
+                        visitor_point += 3;
+                    } else if (type == "dp"){
+                        visitor_point += 2;
+                    } else if (type == "ft"){
+                        visitor_point += 1;
+                    }
+               }
+            </script>
+            <td>{{play_2.text}}</td>
+        {% else %}
+            <script>
+                var type = "{{play_2.type}}";
+                var hit = "{{play_2.hit}}";
+                if (hit == "True"){
+                    if (type == "tp"){
+                        home_point += 3;
+                    } else if (type == "dp"){
+                        home_point += 2;
+                    } else if (type == "ft"){
+                        home_point += 1;
+                    }
+               }
+            </script>
+            <td></td>
+        {% endif %}
+        <td><script>document.write(visitor_point + " - " + home_point);</script></td>
+        {% if play_2.team == game.home_team.id %}
+            <td>{{play_2.text}}</td>
+        {% else %}
+            <td></td>
+        {% endif %}
+    </tr>
+    {% endfor %}
+</table>
+
+<br>
+
+<table>
+    <caption> <h3>Tercer Cuarto</h3> </caption>
+    <tr>
+        <th scope="col" title="Tiempo">Tiempo</th>
+        <th scope="col" title="Visitante">{{game.visitor_team}}</th>
+        <th scope="col" title="Resultado">Resultado</th>
+        <th scope="col" title="Local">{{game.home_team}}</th>
+    </tr>
+    {% for play_3 in quarter_3 %}
+    <tr>
+        <td>{{play_3.play_time.minute|stringformat:"02d"}}:{{play_3.play_time.second|stringformat:"02d"}}</td>
+
+        {% if play_3.team == game.visitor_team.id %}
+            <script>
+                var type = "{{play_3.type}}";
+                var hit = "{{play_3.hit}}";
+                if (hit == "True"){
+                    if (type == "tp"){
+                        visitor_point += 3;
+                    } else if (type == "dp"){
+                        visitor_point += 2;
+                    } else if (type == "ft"){
+                        visitor_point += 1;
+                    }
+               }
+            </script>
+            <td>{{play_3.text}}</td>
+        {% else %}
+            <script>
+                var type = "{{play_3.type}}";
+                var hit = "{{play_3.hit}}";
+                if (hit == "True"){
+                    if (type == "tp"){
+                        home_point += 3;
+                    } else if (type == "dp"){
+                        home_point += 2;
+                    } else if (type == "ft"){
+                        home_point += 1;
+                    }
+               }
+            </script>
+            <td></td>
+        {% endif %}
+        <td><script>document.write(visitor_point + " - " + home_point);</script></td>
+        {% if play_3.team == game.home_team.id %}
+            <td>{{play_3.text}}</td>
+        {% else %}
+            <td></td>
+        {% endif %}
+    </tr>
+    {% endfor %}
+</table>
+
+<br>
+
+<table>
+    <caption> <h3>Cuarto Cuarto</h3> </caption>
+    <tr>
+        <th scope="col" title="Tiempo">Tiempo</th>
+        <th scope="col" title="Visitante">{{game.visitor_team}}</th>
+        <th scope="col" title="Resultado">Resultado</th>
+        <th scope="col" title="Local">{{game.home_team}}</th>
+    </tr>
+    {% for play_4 in quarter_4 %}
+    <tr>
+        <td>{{play_4.play_time.minute|stringformat:"02d"}}:{{play_4.play_time.second|stringformat:"02d"}}</td>
+
+        {% if play_4.team == game.visitor_team.id %}
+            <script>
+                var type = "{{play_4.type}}";
+                var hit = "{{play_4.hit}}";
+                if (hit == "True"){
+                    if (type == "tp"){
+                        visitor_point += 3;
+                    } else if (type == "dp"){
+                        visitor_point += 2;
+                    } else if (type == "ft"){
+                        visitor_point += 1;
+                    }
+               }
+            </script>
+            <td>{{play_4.text}}</td>
+        {% else %}
+            <script>
+                var type = "{{play_4.type}}";
+                var hit = "{{play_4.hit}}";
+                if (hit == "True"){
+                    if (type == "tp"){
+                        home_point += 3;
+                    } else if (type == "dp"){
+                        home_point += 2;
+                    } else if (type == "ft"){
+                        home_point += 1;
+                    }
+               }
+            </script>
+            <td></td>
+        {% endif %}
+        <td><script>document.write(visitor_point + " - " + home_point);</script></td>
+        {% if play_4.team == game.home_team.id %}
+            <td>{{play_4.text}}</td>
+        {% else %}
+            <td></td>
+        {% endif %}
+    </tr>
+    {% endfor %}
+</table>
+
+<br>
+
+{% if max_quarter > 4 %}
+    <table>
+        <caption> <h3>Tiempo extra</h3> </caption>
+        <tr>
+            <th scope="col" title="Cuarto">Cuarto</th>
+            <th scope="col" title="Tiempo">Tiempo</th>
+            <th scope="col" title="Visitante">{{game.visitor_team}}</th>
+            <th scope="col" title="Resultado">Resultado</th>
+            <th scope="col" title="Local">{{game.home_team}}</th>
+        </tr>
+        {% for play_ot in quarter_ot %}
+        <tr>
+            <td>{{play_ot.quarter}}</td>
+            <td>{{play_ot.play_time.minute|stringformat:"02d"}}:{{play_ot.play_time.second|stringformat:"02d"}}</td>
+
+            {% if play_ot.team == game.visitor_team.id %}
+                <script>
+                    var type = "{{play_ot.type}}";
+                    var hit = "{{play_ot.hit}}";
+                    if (hit == "True"){
+                        if (type == "tp"){
+                            visitor_point += 3;
+                        } else if (type == "dp"){
+                            visitor_point += 2;
+                        } else if (type == "ft"){
+                            visitor_point += 1;
+                        }
+                   }
+                </script>
+                <td>{{play_ot.text}}</td>
+            {% else %}
+                <script>
+                    var type = "{{play_ot.type}}";
+                    var hit = "{{play_ot.hit}}";
+                    if (hit == "True"){
+                        if (type == "tp"){
+                            home_point += 3;
+                        } else if (type == "dp"){
+                            home_point += 2;
+                        } else if (type == "ft"){
+                            home_point += 1;
+                        }
+                   }
+                </script>
+                <td></td>
+            {% endif %}
+            <td><script>document.write(visitor_point + " - " + home_point);</script></td>
+            {% if play_ot.team == game.home_team.id %}
+                <td>{{play_ot.text}}</td>
+            {% else %}
+                <td></td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+    </table>
+{% endif %}
+
+{% endblock %}

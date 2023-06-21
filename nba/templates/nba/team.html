@@ -1,0 +1,114 @@
+{% extends 'nba/base.html' %}
+{% load filters %}
+
+{% block content %}
+
+<div  class="inblock">
+    <h2>{{team}}</h2>
+</div>
+
+
+<div id="information">
+    <br>
+    <div class="left">
+        <img src="{{ team.logo }}" alt="" />
+    </div>
+    <div class="left">
+        <ul>
+            <br>
+            <li><b>Conferencia:</b> {{team.get_conference_display}}</li>
+            <li><b>División:</b> {{team.get_division_display}}</li>
+            <li><b>Entrenador:</b> {{team.coach}}</li>
+            <li><b>Estadio:</b> {{team.arena}}</li>
+        </ul>
+        <br>
+    </div>
+</div>
+
+<div class="stats">
+    <table>
+        <caption> <h3><b>Estadísticas</b></h3> </caption>
+        <tr>
+            <th scope="col" title="Temporada">Temporada</th>
+            <th scope="col" title="Puntos">PTS</th>
+            <th scope="col" title="Partidos">P</th>
+            <th scope="col" title="Victorias">V</th>
+            <th scope="col" title="Derrotas">D</th>
+            <th scope="col" title="3 puntos">3P</th>
+            <th scope="col" title="Intentos de 3 puntos">3PI</th>
+            <th scope="col" title="% Acierto de 3 puntos">3PA</th>
+            <th scope="col" title="2 puntos">2P</th>
+            <th scope="col" title="Intentos de 2 puntos">2PI</th>
+            <th scope="col" title="% Acierto de 2 puntos">2PA</th>
+            <th scope="col" title="Tiros libre">TL</th>
+            <th scope="col" title="Intentos de tiro libree">TLI</th>
+            <th scope="col" title="% Acierto de tiro libree">TLA</th>
+            <th scope="col" title="Rebotes ofensivos">RBO</th>
+            <th scope="col" title="Rebotes defensivos">RBD</th>
+            <th scope="col" title="Asistencias">AST</th>
+            <th scope="col" title="Robos">ROB</th>
+            <th scope="col" title="Bloqueos">BLQ</th>
+            <th scope="col" title="Pérdidas balón">PB</th>
+            <th scope="col" title="Faltas personales">FP</th>
+        </tr>
+        <tr>
+            <td><b>{{max_season}}</b></td>
+            <td>{{team.point}}</td>
+            <td>{{team.game}}</td>
+            <td>{{team.victory}}</td>
+            <td>{{team.defeat}}</td>
+            <td>{{team.tp}}</td>
+            <td>{{team.tpa}}</td>
+            <td>{{team.tp|percent:team.tpa|floatformat:"-2"}} %</td>
+            <td>{{team.dp}}</td>
+            <td>{{team.dpa}}</td>
+            <td>{{team.dp|percent:team.dpa|floatformat:"-2"}} %</td>
+            <td>{{team.ft}}</td>
+            <td>{{team.fta}}</td>
+            <td>{{team.ft|percent:team.fta|floatformat:"-2"}} %</td>
+            <td>{{team.orb}}</td>
+            <td>{{team.drb}}</td>
+            <td>{{team.ast}}</td>
+            <td>{{team.stl}}</td>
+            <td>{{team.blk}}</td>
+            <td>{{team.tov}}</td>
+            <td>{{team.foul}}</td>
+        </tr>
+        {% for team_hist in team_hist_list %}
+        <tr>
+            <td><b>{{team_hist.season.name}}</b></td>
+            <td>{{team_hist.point}}</td>
+            <td>{{team_hist.game}}</td>
+            <td>{{team_hist.victory}}</td>
+            <td>{{team_hist.defeat}}</td>
+            <td>{{team_hist.tp}}</td>
+            <td>{{team_hist.tpa}}</td>
+            <td>{{team_hist.tp|percent:team_hist.tpa|floatformat:"-2"}} %</td>
+            <td>{{team_hist.dp}}</td>
+            <td>{{team_hist.dpa}}</td>
+            <td>{{team_hist.dp|percent:team_hist.dpa|floatformat:"-2"}} %</td>
+            <td>{{team_hist.ft}}</td>
+            <td>{{team_hist.fta}}</td>
+            <td>{{team_hist.ft|percent:team_hist.fta|floatformat:"-2"}} %</td>
+            <td>{{team_hist.orb}}</td>
+            <td>{{team_hist.drb}}</td>
+            <td>{{team_hist.ast}}</td>
+            <td>{{team_hist.stl}}</td>
+            <td>{{team_hist.blk}}</td>
+            <td>{{team_hist.tov}}</td>
+            <td>{{team_hist.foul}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+<br>
+
+<h2>Jugadores</h2>
+{% for player in players %}
+<ul>
+    <li><a href="{% url 'player' player_id=player.id %}">{{player}}</a></li>
+</ul>
+{% endfor %}
+
+{% endblock %}

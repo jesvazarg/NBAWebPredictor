@@ -1,0 +1,121 @@
+a.imagen{
+    height:120%;
+}
+.page-header {
+    float: left;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    background: #e15a1f;
+}
+
+.page-header ul {
+    list-style: none;
+    display: flex;
+    width: 100%;
+    height: 10vh;
+    margin: auto;
+}
+
+h2 {
+    font-size: 36pt;
+    font-family: 'Lobster', cursive;
+}
+
+.information {
+    list-style: none;
+}
+
+.information ul {
+    list-style: none;
+    width: 100%;
+    height: 10vh;
+    margin: auto;
+}
+
+.main-title {
+    float: left;
+    perspective: 1000px;
+    padding: 0rem 10rem 1.15rem 10rem;
+}
+
+.menu {
+    float: left;
+    perspective: 1000px;
+    padding: 2rem 5rem 1.15rem 5rem;
+}
+
+.menu:hover {
+    background-color: #cc470d;
+
+}
+
+.page-header li:active {
+    transform: translateY(4px);
+}
+
+.page-header a {
+    color: #FFF;
+    display: block;
+    padding: 13px 20px 13px 20px;
+    text-decoration: none;
+    line-height: 1;
+    font-weight: 1000;
+    font-size: 26px;
+}
+
+.main-title {
+    font-weight: 5000;
+}
+
+table {
+  border: 2px solid #000000;
+  width: 100%;
+  text-align: center;
+}
+table td, table th {
+  border: 1px solid #000000;
+  padding: 5px 4px;
+}
+table tbody td {
+  font-size: 13px;
+}
+table tr:nth-child(even) {
+  background: #F5C08A;
+}
+table th{
+  background: #E15A1F;
+  background: -moz-linear-gradient(top, #e88357 0%, #e46a35 66%, #E15A1F 100%);
+  background: -webkit-linear-gradient(top, #e88357 0%, #e46a35 66%, #E15A1F 100%);
+  background: linear-gradient(to bottom, #e88357 0%, #e46a35 66%, #E15A1F 100%);
+  border-bottom: 2px solid #000000;
+}
+table th {
+  font-size: 15px;
+  font-weight: bold;
+  color: #000000;
+  text-align: center;
+}
+table tfoot td {
+  font-size: 14px;
+}
+.left {
+    float:left;
+    margin-right:100px;
+}
+.right {
+    float:right;
+    margin-left:100px;
+}
+.inblock {
+  display: inline-block;
+}
+.text_center {
+    text-align: center
+}
+.down{
+    display: block;
+    height: 20px;
+    margin-left:300px;
+}

@@ -1,0 +1,54 @@
+{% extends 'nba/base.html' %}
+
+{% block content %}
+<div  class="inblock">
+    <h2>Equipos</h2>
+</div>
+
+<div>
+    <div class="left inblock">
+        <h3><b>Conferencia Oriental</b></h3>
+        <h4>Atlántico</h4>
+        {% for team in atlantic_division %}
+            <ul>
+                <li><a href="{% url 'team' team_id=team.id %}">{{team}}</a></li>
+            </ul>
+        {% endfor %}
+        <h4>Central</h4>
+        {% for team in central_division %}
+            <ul>
+                <li><a href="{% url 'team' team_id=team.id %}">{{team}}</a></li>
+            </ul>
+        {% endfor %}
+        <h4>Sureste</h4>
+        {% for team in southeast_division %}
+            <ul>
+                <li><a href="{% url 'team' team_id=team.id %}">{{team}}</a></li>
+            </ul>
+        {% endfor %}
+    </div>
+
+    <div class="left inblock">
+        <h3><b>Conferencia Occidental</b></h3>
+        <h4>Noroeste</h4>
+        {% for team in northwest_division %}
+            <ul>
+                <li><a href="{% url 'team' team_id=team.id %}">{{team}}</a></li>
+            </ul>
+        {% endfor %}
+        <h4>Pacífico</h4>
+        {% for team in pacific_division %}
+            <ul>
+                <li><a href="{% url 'team' team_id=team.id %}">{{team}}</a></li>
+            </ul>
+        {% endfor %}
+        <h4>Suroeste</h4>
+        {% for team in southwest_division %}
+            <ul>
+                <li><a href="{% url 'team' team_id=team.id %}">{{team}}</a></li>
+            </ul>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

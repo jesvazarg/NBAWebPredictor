@@ -1,0 +1,116 @@
+{% extends 'nba/base.html' %}
+{% load filters %}
+
+{% block content %}
+
+<form method="post">
+    {% csrf_token %}
+    <div>
+        <div class="inblock">
+            <div class="left inblock">
+                <h3 class="text_center">Filtros</h3>
+                <ul>
+                    <label>Nombre&nbsp;&nbsp;</label><input id="name_filter" name="name" value="{{name}}" type="text" />
+                </ul>
+                <ul>
+                    <label>Equipo&nbsp;&nbsp;</label>
+                    <select id="team_filter" name="team">
+                        {% if filter_team == "no_filter"%}
+                            <option value="no_filter" selected="selected">Selecciona equipo</option>
+                        {% else %}
+                            <option value="no_filter">Selecciona equipo</option>
+                        {% endif %}
+
+                        {% if filter_team == "no_team"%}
+                            <option value="no_team" selected="selected">SIN EQUIPO</option>
+                        {% else %}
+                            <option value="no_team">SIN EQUIPO</option>
+                        {% endif %}
+                        {% for team in teams %}
+                            {% if filter_team == team.id%}
+                                <option value="{{team.id}}" selected="selected">{{team}}</option>
+                            {% else %}
+                                <option value="{{team.id}}">{{team}}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                </ul>
+            </div>
+            <div class="right inblock">
+                <h3  class="text_center">Ordenación</h3>
+                <ul>
+                    <select id="player_order" name="order">
+                        {% if order_player == "name_asc"%}
+                            <option value="name_asc" selected="selected">Nombre &uarr;</option>
+                        {% else %}
+                            <option value="name_asc">Nombre &uarr;</option>
+                        {% endif %}
+
+                        {% if order_player == "name_desc"%}
+                            <option value="name_desc" selected="selected">Nombre &darr;</option>
+                        {% else %}
+                            <option value="name_desc">Nombre &darr;</option>
+                        {% endif %}
+
+                        {% if order_player == "team_asc"%}
+                            <option value="team_asc" selected="selected">Equipo &uarr;</option>
+                        {% else %}
+                            <option value="team_asc">Equipo &uarr;</option>
+                        {% endif %}
+
+                        {% if order_player == "team_desc"%}
+                            <option value="team_desc" selected="selected">Equipo &darr;</option>
+                        {% else %}
+                            <option value="team_desc">Equipo &darr;</option>
+                        {% endif %}
+
+                        {% if order_player == "age_asc"%}
+                            <option value="age_asc" selected="selected">Edad &uarr;</option>
+                        {% else %}
+                            <option value="age_asc">Edad &uarr;</option>
+                        {% endif %}
+
+                        {% if order_player == "age_desc"%}
+                            <option value="age_desc" selected="selected">Edad &darr;</option>
+                        {% else %}
+                            <option value="age_desc">Edad &darr;</option>
+                        {% endif %}
+                    </select>
+                </ul>
+            </div>
+        </div>
+        <div class="down">
+            <ul>
+                <button type="submit">Aplicar</button>
+            </ul>
+        </div>
+    </div>
+</form>
+
+<br>
+
+<h2>Lista de jugadores</h2>
+
+<table>
+    <tr>
+        <th scope="col" title="Nombre">Nombre</th>
+        <th scope="col" title="Equipo">Equipo</th>
+        <th scope="col" title="Número">Número</th>
+        <th scope="col" title="Años">Años</th>
+    </tr>
+
+    {% for player in players|slice:":100" %}
+        <tr>
+            <td><a href="{% url 'player' player_id=player.id %}">{{player.name}}</a></td>
+            <td><a href="{% url 'team' team_id=player.team_id %}">{{player.team.name}}</a></td>
+            {% if player.number is None%}
+                <td></td>
+            {% else %}
+                <td>{{player.number}}</td>
+            {% endif %}
+            <td>{{player.dob|years_old}}</td>
+        </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

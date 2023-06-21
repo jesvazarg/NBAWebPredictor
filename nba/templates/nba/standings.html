@@ -1,0 +1,293 @@
+{% extends 'nba/base.html' %}
+{% load filters %}
+
+{% block content %}
+
+<div  class="inblock">
+    <h3>Temporadas</h3>
+</div>
+<ul>
+    {% for s in seasons %}
+        {% if forloop.counter > 1 %}
+            |
+        {% endif %}
+        <a href="{% url 'standings' season_id=s.id%}">{{s.name}}</a>
+    {% endfor %}
+</ul>
+
+<br>
+
+<h2>Clasificación de la temporada {{var_season}}</h2>
+
+<table>
+    <caption> <h3>Conferencia Oriental</h3> </caption>
+    <tr>
+        <th scope="col" title="Posición">Pos</th>
+        <th scope="col" title="Equipo">Equipo</th>
+        <th scope="col" title="Partidos jugados">Partidos</th>
+        <th scope="col" title="Victorias">Victorias</th>
+        <th scope="col" title="Derrotas">Derrotas</th>
+        <th scope="col" title="Puntos por partidos">Puntos/p</th>
+    </tr>
+    {% for team in eastern_teams %}
+        <tr>
+            <td><b>{{forloop.counter}}</b></td>
+            <td>{{team.name}}</td>
+            <td>{{team.season_game}}</td>
+            <td>{{team.victory}}</td>
+            <td>{{team.defeat}}</td>
+            <td>{{team.season_point|divide:team.season_game|floatformat:"-2"}}</td>
+        </tr>
+    {% endfor %}
+</table>
+
+<br>
+
+<table>
+    <caption> <h3>Conferencia Occidental</h3> </caption>
+    <tr>
+        <th scope="col" title="Posición">Pos</th>
+        <th scope="col" title="Equipo">Equipo</th>
+        <th scope="col" title="Partidos jugados">Partidos</th>
+        <th scope="col" title="Victorias">Victorias</th>
+        <th scope="col" title="Derrotas">Derrotas</th>
+        <th scope="col" title="Puntos por partidos">Puntos/p</th>
+    </tr>
+    {% for team in western_teams %}
+        <tr>
+            <td><b>{{forloop.counter}}</b></td>
+            <td>{{team.name}}</td>
+            <td>{{team.victory|add:team.defeat}}</td>
+            <td>{{team.victory}}</td>
+            <td>{{team.defeat}}</td>
+            <td>{{team.season_point|divide:team.season_game|floatformat:"-2"}}</td>
+        </tr>
+    {% endfor %}
+</table>
+
+{% if play_in_e %}
+    <br>
+    <br>
+
+    <h2>Play-In de la temporada {{var_season}}</h2>
+
+    <table>
+        <caption> <h3>Conferencia Oriental</h3> </caption>
+        <tr>
+            <th scope="col" title="Tipo">Tipo</th>
+            <th scope="col" title="Equipo">Equipo</th>
+            <th scope="col" title="Resultado">Resultado</th>
+            <th scope="col" title="Equipo">Equipo</th>
+        </tr>
+        {% for p in play_in_e %}
+            <tr>
+                <td>{{p.4}}</td>
+
+                {% if p.2 > p.3 %}
+                    <td><b>{{p.0.name}}</b></td>
+                {% else %}
+                    <td>{{p.0.name}}</td>
+                {% endif %}
+
+                {% if p.2 > p.3 %}
+                    <td><b>{{p.2}}</b> - {{p.3}}</td>
+                {% else %}
+                    <td>{{p.2}} - <b>{{p.3}}</b></td>
+                {% endif %}
+
+                {% if p.3 > p.2 %}
+                    <td><b>{{p.1.name}}</b></td>
+                {% else %}
+                    <td>{{p.1.name}}</td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+    </table>
+
+    <br>
+
+    <table>
+        <caption> <h3>Conferencia Occidental</h3> </caption>
+        <tr>
+            <th scope="col" title="Tipo">Tipo</th>
+            <th scope="col" title="Equipo">Equipo</th>
+            <th scope="col" title="Resultado">Resultado</th>
+            <th scope="col" title="Equipo">Equipo</th>
+        </tr>
+        {% for p in play_in_w %}
+            <tr>
+                <td>{{p.4}}</td>
+
+                {% if p.2 > p.3 %}
+                    <td><b>{{p.0.name}}</b></td>
+                {% else %}
+                    <td>{{p.0.name}}</td>
+                {% endif %}
+
+                {% if p.2 > p.3 %}
+                    <td><b>{{p.2}}</b> - {{p.3}}</td>
+                {% else %}
+                    <td>{{p.2}} - <b>{{p.3}}</b></td>
+                {% endif %}
+
+                {% if p.3 > p.2 %}
+                    <td><b>{{p.1.name}}</b></td>
+                {% else %}
+                    <td>{{p.1.name}}</td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+    </table>
+{% endif %}
+
+
+{% if fr_play_off %}
+    <br>
+    <br>
+
+    <h2>Play-Off de la temporada {{var_season}}</h2>
+
+    <table>
+        <caption> <h3>Primera ronda</h3> </caption>
+        <tr>
+            <th scope="col" title="Conferencia">Conferencia</th>
+            <th scope="col" title="Equipo">Equipo</th>
+            <th scope="col" title="Resultado">Resultado</th>
+            <th scope="col" title="Equipo">Equipo</th>
+        </tr>
+        {% for p in fr_play_off %}
+            <tr>
+                <td>{{p.4}}</td>
+
+                {% if p.2 > p.3 %}
+                    <td><b>{{p.0.name}}</b></td>
+                {% else %}
+                    <td>{{p.0.name}}</td>
+                {% endif %}
+
+                {% if p.2 > p.3 %}
+                    <td><b>{{p.2}}</b> - {{p.3}}</td>
+                {% else %}
+                    <td>{{p.2}} - <b>{{p.3}}</b></td>
+                {% endif %}
+
+                {% if p.3 > p.2 %}
+                    <td><b>{{p.1.name}}</b></td>
+                {% else %}
+                    <td>{{p.1.name}}</td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+    </table>
+
+    {% if sf_play_off %}
+        <br>
+
+        <table>
+            <caption> <h3>Semifinal de Conferencia</h3> </caption>
+            <tr>
+                <th scope="col" title="Conferencia">Conferencia</th>
+                <th scope="col" title="Equipo">Equipo</th>
+                <th scope="col" title="Resultado">Resultado</th>
+                <th scope="col" title="Equipo">Equipo</th>
+            </tr>
+            {% for p in sf_play_off %}
+                <tr>
+                    <td>{{p.4}}</td>
+
+                    {% if p.2 > p.3 %}
+                        <td><b>{{p.0.name}}</b></td>
+                    {% else %}
+                        <td>{{p.0.name}}</td>
+                    {% endif %}
+
+                    {% if p.2 > p.3 %}
+                        <td><b>{{p.2}}</b> - {{p.3}}</td>
+                    {% else %}
+                        <td>{{p.2}} - <b>{{p.3}}</b></td>
+                    {% endif %}
+
+                    {% if p.3 > p.2 %}
+                        <td><b>{{p.1.name}}</b></td>
+                    {% else %}
+                        <td>{{p.1.name}}</td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+        </table>
+
+        {% if f_play_off %}
+            <br>
+
+            <table>
+                <caption> <h3>Final de Conferencia</h3> </caption>
+                <tr>
+                    <th scope="col" title="Conferencia">Conferencia</th>
+                    <th scope="col" title="Equipo">Equipo</th>
+                    <th scope="col" title="Resultado">Resultado</th>
+                    <th scope="col" title="Equipo">Equipo</th>
+                </tr>
+                {% for p in f_play_off %}
+                    <tr>
+                        <td>{{p.4}}</td>
+
+                        {% if p.2 > p.3 %}
+                            <td><b>{{p.0.name}}</b></td>
+                        {% else %}
+                            <td>{{p.0.name}}</td>
+                        {% endif %}
+
+                        {% if p.2 > p.3 %}
+                            <td><b>{{p.2}}</b> - {{p.3}}</td>
+                        {% else %}
+                            <td>{{p.2}} - <b>{{p.3}}</b></td>
+                        {% endif %}
+
+                        {% if p.3 > p.2 %}
+                            <td><b>{{p.1.name}}</b></td>
+                        {% else %}
+                            <td>{{p.1.name}}</td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+            </table>
+
+            {% if ff_play_off %}
+                <br>
+
+                <table>
+                    <caption> <h3>Final de los Play-Off</h3> </caption>
+                    <tr>
+                        <th scope="col" title="Equipo">Equipo</th>
+                        <th scope="col" title="Resultado">Resultado</th>
+                        <th scope="col" title="Equipo">Equipo</th>
+                    </tr>
+                    {% for p in ff_play_off %}
+                        <tr>
+                            {% if p.2 > p.3 %}
+                                <td><b>{{p.0.name}}</b></td>
+                            {% else %}
+                                <td>{{p.0.name}}</td>
+                            {% endif %}
+
+                            {% if p.2 > p.3 %}
+                                <td><b>{{p.2}}</b> - {{p.3}}</td>
+                            {% else %}
+                                <td>{{p.2}} - <b>{{p.3}}</b></td>
+                            {% endif %}
+
+                            {% if p.3 > p.2 %}
+                                <td><b>{{p.1.name}}</b></td>
+                            {% else %}
+                                <td>{{p.1.name}}</td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                </table>
+            {% endif %}
+        {% endif %}
+    {% endif %}
+{% endif %}
+
+
+{% endblock %}
