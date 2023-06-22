@@ -13,7 +13,7 @@
     <p>Aquí se recoge información de la página web <a href="https://www.basketball-reference.com/" target="_blank">basketball-reference.com/</a> y se predicen los ganadores de los partidos.</p>
     <br>
     {% if games_predicted > 0 %}
-        <p>Actualmente se ha acertado un {{accuracy|floatformat:"-2"}} % en el pronóstico de ganador de los partidos.</p>
+        <p>Actualmente se ha acertado un <b>{{accuracy|floatformat:"-2"}} %</b> en el pronóstico de ganador de los partidos.</p>
     {% else %}
         <p>Actualmente se está recuperando información sobre los partidos. Cuando se haya cargado más datos se proporcionará una predicción de ganador a los partidos y un porcentaje de acierto.</p>
     {% endif %}
