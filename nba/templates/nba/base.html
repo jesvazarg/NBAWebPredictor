@@ -13,16 +13,14 @@
     <body>
         <div class="page-header">
             <ul>
-                <li class="main-title">
-                    <a class="imagen" href="/">
-                        <img src="{% static 'media/logo/logo_img_nar.png' %}" alt="logo_nba_predictor" height="100%"/>
-                        <img src="{% static 'media/logo/titulo_web.png' %}" alt="logo_nba_predictor" height="100%"/>
-                    </a>
-                </li>
-                <li class="menu"><a href="{% url 'standings' %}" class="top-menu">Clasificación</a></li>
-                <li class="menu"><a href="{% url 'game_list' %}" class="top-menu">Partidos</a></li>
-                <li class="menu"><a href="{% url 'team_list' %}" class="top-menu">Equipos</a></li>
-                <li class="menu"><a href="{% url 'player_list' %}" class="top-menu">Jugadores</a></li>
+                <a class="imagen main-title" href="/">
+                    <img src="{% static 'media/logo/logo_img_nar.png' %}" alt="logo_nba_predictor" height="100%"/>
+                    <img src="{% static 'media/logo/titulo_web.png' %}" alt="logo_nba_predictor" height="100%"/>
+                </a>
+                <a href="{% url 'standings' %}" class="menu"><li>Clasificación</li></a>
+                <a href="{% url 'game_list' %}" class="menu"><li>Partidos</li></a>
+                <a href="{% url 'team_list' %}" class="menu"><li>Equipos</li></a>
+                <a href="{% url 'player_list' %}" class="menu"><li>Jugadores</li></a>
             </ul>
         </div>
         <div class="content container">
