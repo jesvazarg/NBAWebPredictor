@@ -135,6 +135,7 @@ def game_list(request, season_id: str = None, month: str = None):
             var_season = seasons.filter(id=season_id).latest('id')
     
         months = SeasonMonth.objects.filter(season_id=var_season.id)
+        
         if len(months) > 0:
             if month is None:
                 if season_id is None:
@@ -146,6 +147,7 @@ def game_list(request, season_id: str = None, month: str = None):
                 var_month = months.filter(month=month).latest('id')
         
             game_list = Game.objects.filter(season_month_id=var_month.id)
+            game_list = sorted(game_list, key=lambda x: (x.game_date, x.game_time), reverse=True)
         
             var_month.month = month_to_spanish(var_month.month)
             for month in months:
@@ -328,22 +330,30 @@ def standings(request, season_id: str = None):
             western_teams = western_teams.annotate(tie_break=Value(0))
         
             for team in eastern_teams:
-                team.season_game = Game.objects.filter(season_month_id__in=months).filter(type="SE").\
-                                       filter(visitor_team_id=team.id).count() + \
-                                   Game.objects.filter(season_month_id__in=months).filter(type="SE").\
-                                       filter(home_team_id=team.id).count()
-                team.victory = Game.objects.filter(season_month_id__in=months).filter(type="SE").\
-                                   filter(visitor_team_id=team.id).filter(visitor_point__gt=F('home_point')).count() + \
-                               Game.objects.filter(season_month_id__in=months).filter(type="SE").\
-                                   filter(home_team_id=team.id).filter(home_point__gt=F('visitor_point')).count()
-                team.defeat = Game.objects.filter(season_month_id__in=months).filter(type="SE").\
-                                  filter(visitor_team_id=team.id).filter(home_point__gt=F('visitor_point')).count() + \
-                              Game.objects.filter(season_month_id__in=months).filter(type="SE").\
-                                  filter(home_team_id=team.id).filter(visitor_point__gt=F('home_point')).count()
-                team.season_point = Game.objects.filter(season_month_id__in=months).filter(type="SE").\
-                                        filter(visitor_team_id=team.id).aggregate(sp_v=Sum('visitor_point'))['sp_v'] +\
-                                    Game.objects.filter(season_month_id__in=months).filter(type="SE").\
+                season_game_v = Game.objects.filter(season_month_id__in=months).filter(type="SE"). \
+                                        filter(visitor_team_id=team.id).count()
+                season_game_h = Game.objects.filter(season_month_id__in=months).filter(type="SE"). \
+                                        filter(home_team_id=team.id).count()
+                team.season_game = (season_game_v if season_game_v is not None else 0) + \
+                                   (season_game_h if season_game_h is not None else 0)
+                victory_v = Game.objects.filter(season_month_id__in=months).filter(type="SE"). \
+                                    filter(visitor_team_id=team.id).filter(visitor_point__gt=F('home_point')).count()
+                victory_h = Game.objects.filter(season_month_id__in=months).filter(type="SE"). \
+                                    filter(home_team_id=team.id).filter(home_point__gt=F('visitor_point')).count()
+                team.victory = (victory_v if victory_v is not None else 0) + \
+                               (victory_h if victory_h is not None else 0)
+                defeat_v = Game.objects.filter(season_month_id__in=months).filter(type="SE"). \
+                                    filter(visitor_team_id=team.id).filter(home_point__gt=F('visitor_point')).count()
+                defeat_h = Game.objects.filter(season_month_id__in=months).filter(type="SE"). \
+                                    filter(home_team_id=team.id).filter(visitor_point__gt=F('home_point')).count()
+                team.defeat = (defeat_v if defeat_v is not None else 0) + \
+                              (defeat_h if defeat_h is not None else 0)
+                season_point_v = Game.objects.filter(season_month_id__in=months).filter(type="SE"). \
+                                        filter(visitor_team_id=team.id).aggregate(sp_v=Sum('visitor_point'))['sp_v']
+                season_point_h = Game.objects.filter(season_month_id__in=months).filter(type="SE"). \
                                         filter(home_team_id=team.id).aggregate(sp_h=Sum('home_point'))['sp_h']
+                team.season_point = (season_point_v if season_point_v is not None else 0) + \
+                                    (season_point_h if season_point_h is not None else 0)
         
             eastern_teams_sorted = sorted(eastern_teams, key=lambda x: (x.victory, x.tie_break), reverse=True)
             before_teams = []
@@ -361,22 +371,30 @@ def standings(request, season_id: str = None):
             eastern_teams = sorted(eastern_teams, key=lambda x: (x.victory, x.tie_break), reverse=True)
         
             for team in western_teams:
-                team.season_game = Game.objects.filter(season_month_id__in=months).filter(type="SE"). \
-                                       filter(visitor_team_id=team.id).count() + \
-                                   Game.objects.filter(season_month_id__in=months).filter(type="SE"). \
-                                       filter(home_team_id=team.id).count()
-                team.victory = Game.objects.filter(season_month_id__in=months).filter(type="SE").\
-                                   filter(visitor_team_id=team.id).filter(visitor_point__gt=F('home_point')).count() + \
-                               Game.objects.filter(season_month_id__in=months).filter(type="SE").\
-                                   filter(home_team_id=team.id).filter(home_point__gt=F('visitor_point')).count()
-                team.defeat = Game.objects.filter(season_month_id__in=months).filter(type="SE").\
-                                  filter(visitor_team_id=team.id).filter(home_point__gt=F('visitor_point')).count() + \
-                              Game.objects.filter(season_month_id__in=months).filter(type="SE").\
-                                  filter(home_team_id=team.id).filter(visitor_point__gt=F('home_point')).count()
-                team.season_point = Game.objects.filter(season_month_id__in=months).filter(type="SE"). \
-                                        filter(visitor_team_id=team.id).aggregate(sp_v=Sum('visitor_point'))['sp_v'] + \
-                                    Game.objects.filter(season_month_id__in=months).filter(type="SE"). \
+                season_game_v = Game.objects.filter(season_month_id__in=months).filter(type="SE"). \
+                                        filter(visitor_team_id=team.id).count()
+                season_game_h = Game.objects.filter(season_month_id__in=months).filter(type="SE"). \
+                                        filter(home_team_id=team.id).count()
+                team.season_game = (season_game_v if season_game_v is not None else 0) + \
+                                   (season_game_h if season_game_h is not None else 0)
+                victory_v = Game.objects.filter(season_month_id__in=months).filter(type="SE"). \
+                                    filter(visitor_team_id=team.id).filter(visitor_point__gt=F('home_point')).count()
+                victory_h = Game.objects.filter(season_month_id__in=months).filter(type="SE"). \
+                                    filter(home_team_id=team.id).filter(home_point__gt=F('visitor_point')).count()
+                team.victory = (victory_v if victory_v is not None else 0) + \
+                               (victory_h if victory_h is not None else 0)
+                defeat_v = Game.objects.filter(season_month_id__in=months).filter(type="SE"). \
+                                    filter(visitor_team_id=team.id).filter(home_point__gt=F('visitor_point')).count()
+                defeat_h = Game.objects.filter(season_month_id__in=months).filter(type="SE"). \
+                                    filter(home_team_id=team.id).filter(visitor_point__gt=F('home_point')).count()
+                team.defeat = (defeat_v if defeat_v is not None else 0) + \
+                              (defeat_h if defeat_h is not None else 0)
+                season_point_v = Game.objects.filter(season_month_id__in=months).filter(type="SE"). \
+                                        filter(visitor_team_id=team.id).aggregate(sp_v=Sum('visitor_point'))['sp_v']
+                season_point_h = Game.objects.filter(season_month_id__in=months).filter(type="SE"). \
                                         filter(home_team_id=team.id).aggregate(sp_h=Sum('home_point'))['sp_h']
+                team.season_point = (season_point_v if season_point_v is not None else 0) + \
+                                    (season_point_h if season_point_h is not None else 0)
         
             western_teams_sorted = sorted(western_teams, key=lambda x: (x.victory, x.tie_break), reverse=True)
             before_teams = []
