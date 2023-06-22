@@ -34,6 +34,12 @@ h2 {
     margin: auto;
 }
 
+.align-center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .main-title {
     float: left;
     perspective: 1000px;
