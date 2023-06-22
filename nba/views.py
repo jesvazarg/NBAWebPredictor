@@ -147,7 +147,7 @@ def game_list(request, season_id: str = None, month: str = None):
                 var_month = months.filter(month=month).latest('id')
         
             game_list = Game.objects.filter(season_month_id=var_month.id)
-            game_list = sorted(game_list, key=lambda x: (x.game_date, x.game_time), reverse=True)
+            game_list = sorted(game_list, key=lambda x: (x.game_date, x.game_time), reverse=False)
         
             var_month.month = month_to_spanish(var_month.month)
             for month in months:
