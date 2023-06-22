@@ -8,12 +8,18 @@
 <br>
 <br>
 <div>
-    <p>Esta página web es la realización del Trabajo Fin de Grado de Ingeniería Informática de la Universidad de Sevilla</p>
+    <p>Esta página web es la realización del Trabajo Fin de Grado de Ingeniería Informática de la Universidad de Sevilla.</p>
     <br>
-    <p>Aquí se recoge información de la página web <a href="https://www.basketball-reference.com/" target="_blank">basketball-reference.com/</a> y se predicen los ganadores de los partidos</p>
+    <p>Aquí se recoge información de la página web <a href="https://www.basketball-reference.com/" target="_blank">basketball-reference.com/</a> y se predicen los ganadores de los partidos.</p>
+    <br>
+    {% if games_predicted > 0 %}
+        <p>Actualmente se ha acertado un {{accuracy|floatformat:"-2"}} % en el pronóstico de ganador de los partidos.</p>
+    {% else %}
+        <p>Actualmente se está recuperando información sobre los partidos. Cuando se haya cargado más datos se proporcionará una predicción de ganador a los partidos y un porcentaje de acierto.</p>
+    {% endif %}
     <br>
     <p>El proyecto ha sido realizado por <b><i>Jesús Vázquez Argumedo</i></b></p>
-    <p>y con la colaboración de los tutores <b><i>Francisco Javier Ortega Rodríguez</i></b> y <b><i>Alejandro Fernández-Montes González</i></b></p>
+    <p>y con la colaboración de los tutores <b><i>Francisco Javier Ortega Rodríguez</i></b> y <b><i>Alejandro Fernández-Montes González</i></b>.</p>
 </div>
 
 {% endblock %}
