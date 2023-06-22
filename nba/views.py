@@ -12,7 +12,7 @@ def welcome(request):
             filter(prediction=F('visitor_team_id')).count()
         well_predicted_games_h = games_predicted.filter(home_point__gt=F('visitor_point')).\
             filter(prediction=F('home_team_id')).count()
-        accuracy = ((well_predicted_games_v + well_predicted_games_h) / games_predicted.coun()) * 100
+        accuracy = ((well_predicted_games_v + well_predicted_games_h) / games_predicted.count()) * 100
 
     return render(request, 'nba/welcome.html', {'games_predicted': games_predicted, 'accuracy': accuracy})
 
