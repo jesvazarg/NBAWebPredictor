@@ -38,7 +38,12 @@
     </tr>
     {% for game in game_list %}
         <tr>
-            <td><a href="{% url 'game' game_id=game.id %}">Ver partido</a></td>
+            {% if game.visitor_point is None or game.home_point is None %}
+                <td></td>
+            {% else %}
+                <td><a href="{% url 'game' game_id=game.id %}">Ver partido</a></td>
+            {% endif %}
+            
             {% if game.game_date is None %}
                 <td></td>
             {% else %}
