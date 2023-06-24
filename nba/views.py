@@ -450,6 +450,21 @@ def standings(request, season_id: str = None):
                     play_in_e.append([eight_e, nine_e, eight_e_victory, nine_e_victory, "Puesto 8"])
                     if eight_e_victory < nine_e_victory:
                         eight_e = nine_e
+
+            if var_season.id >= 2020 and len(play_in_e) == 0:
+                play_in_games_e = Game.objects.filter(season_month_id__in=months).filter(type="PI"). \
+                    filter(visitor_team_id__in=eastern_teams)
+                for game in play_in_games_e:
+                    play_in_e.append([game.visitor_team, game.home_team,
+                                     1 if game.visitor_point > game.home_point else 0,
+                                     1 if game.home_point > game.visitor_point else 0, " - "])
+
+                eight_game_e = Game.objects.filter(season_month_id__in=months).filter(type="POER"). \
+                    filter(visitor_team_id=eastern_teams[0])
+                eight_e = eight_game_e[0].home_team if len(eight_game_e) > 0 else eastern_teams[7]
+                seven_game_e = Game.objects.filter(season_month_id__in=months).filter(type="POER"). \
+                    filter(visitor_team_id=eastern_teams[1])
+                seven_e = seven_game_e[0].home_team if len(seven_game_e) > 0 else eastern_teams[6]
         
             # Play-In Western
             seven_w = None
@@ -482,6 +497,21 @@ def standings(request, season_id: str = None):
                     play_in_w.append([eight_w, nine_w, eight_w_victory, nine_w_victory, "Puesto 8"])
                     if eight_w_victory < nine_w_victory:
                         eight_w = nine_w
+
+            if var_season.id >= 2020 and len(play_in_w) == 0:
+                play_in_games_w = Game.objects.filter(season_month_id__in=months).filter(type="PI"). \
+                    filter(visitor_team_id__in=western_teams)
+                for game in play_in_games_w:
+                    play_in_w.append([game.visitor_team, game.home_team,
+                                     1 if game.visitor_point > game.home_point else 0,
+                                     1 if game.home_point > game.visitor_point else 0, " - "])
+
+                eight_game_w = Game.objects.filter(season_month_id__in=months).filter(type="POWR"). \
+                    filter(visitor_team_id=western_teams[0])
+                eight_w = eight_game_w[0].home_team if len(eight_game_w) > 0 else western_teams[7]
+                seven_game_w = Game.objects.filter(season_month_id__in=months).filter(type="POWR"). \
+                    filter(visitor_team_id=western_teams[1])
+                seven_w = seven_game_w[0].home_team if len(seven_game_w) > 0 else western_teams[6]
         
             # First Round Play-Off Eastern
             one_e = None
