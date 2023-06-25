@@ -60,28 +60,30 @@
             <th scope="col" title="Pérdidas balón">PB</th>
             <th scope="col" title="Faltas personales">FP</th>
         </tr>
-        <tr>
-            <td><b>{{max_season}}</b></td>
-            <td>{{player.team.name}}</td>
-            <td>{{player.point}}</td>
-            <td>{{player.game}}</td>
-            <td>{{player.tp}}</td>
-            <td>{{player.tpa}}</td>
-            <td>{{player.tp|percent:player.tpa|floatformat:"-2"}} %</td>
-            <td>{{player.dp}}</td>
-            <td>{{player.dpa}}</td>
-            <td>{{player.dp|percent:player.dpa|floatformat:"-2"}} %</td>
-            <td>{{player.ft}}</td>
-            <td>{{player.fta}}</td>
-            <td>{{player.ft|percent:player.fta|floatformat:"-2"}} %</td>
-            <td>{{player.orb}}</td>
-            <td>{{player.drb}}</td>
-            <td>{{player.ast}}</td>
-            <td>{{player.stl}}</td>
-            <td>{{player.blk}}</td>
-            <td>{{player.tov}}</td>
-            <td>{{player.foul}}</td>
-        </tr>
+        {% if player.game > 0 %}
+            <tr>
+                <td><b>{{max_season}}</b></td>
+                <td>{{player.team.name}}</td>
+                <td>{{player.point}}</td>
+                <td>{{player.game}}</td>
+                <td>{{player.tp}}</td>
+                <td>{{player.tpa}}</td>
+                <td>{{player.tp|percent:player.tpa|floatformat:"-2"}} %</td>
+                <td>{{player.dp}}</td>
+                <td>{{player.dpa}}</td>
+                <td>{{player.dp|percent:player.dpa|floatformat:"-2"}} %</td>
+                <td>{{player.ft}}</td>
+                <td>{{player.fta}}</td>
+                <td>{{player.ft|percent:player.fta|floatformat:"-2"}} %</td>
+                <td>{{player.orb}}</td>
+                <td>{{player.drb}}</td>
+                <td>{{player.ast}}</td>
+                <td>{{player.stl}}</td>
+                <td>{{player.blk}}</td>
+                <td>{{player.tov}}</td>
+                <td>{{player.foul}}</td>
+            </tr>
+        {% endif %}
         {% for player_hist in player_hist_list %}
         <tr>
             <td><b>{{player_hist.season.name}}</b></td>
