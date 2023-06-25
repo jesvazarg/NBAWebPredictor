@@ -16,8 +16,16 @@
     <div class="left">
         <ul>
             <br>
-            <li><b>Equipo:</b> <a href="{% url 'team' team_id=player.team.id %}">{{player.team}}</a></li>
-            <li><b>Número:</b> {{player.number}}</li>
+            {% if player.team is not None %}
+                <li><b>Equipo:</b> <a href="{% url 'team' team_id=player.team.id %}">{{player.team}}</a></li>
+            {% else %}
+                <li><b>Equipo:</b> -</li>
+            {% endif %}
+            {% if player.number is not None %}
+                <li><b>Número:</b> {{player.number}}</li>
+            {% else %}
+                <li><b>Número:</b> -</li>
+            {% endif %}
             <li><b>Fecha nacimiento:</b> {{player.dob}}</li>
             <li><b>Posición:</b> {{position}}</li>
             <li><b>Lanzador:</b> {{shoot}}</li>
