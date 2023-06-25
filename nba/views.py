@@ -7,14 +7,14 @@ from .models import Season, SeasonMonth, Team, Player, TeamHist, PlayerHist, Gam
 def welcome(request):
     games_predicted = Game.objects.filter(prediction__isnull=False)
     accuracy = 0
-    if len(games_predicted) > 0:
+    if games_predicted.count() > 0:
         well_predicted_games_v = games_predicted.filter(visitor_point__gt=F('home_point')).\
             filter(prediction=F('visitor_team_id')).count()
         well_predicted_games_h = games_predicted.filter(home_point__gt=F('visitor_point')).\
             filter(prediction=F('home_team_id')).count()
         accuracy = ((well_predicted_games_v + well_predicted_games_h) / games_predicted.count()) * 100
 
-    return render(request, 'nba/welcome.html', {'games_predicted': games_predicted, 'accuracy': accuracy})
+    return render(request, 'nba/welcome.html', {'games_predicted': games_predicted.count(), 'accuracy': accuracy})
 
 
 def team_list(request):
