@@ -65,79 +65,81 @@
     {% endfor %}
 </table>
 
-{% if play_in_e %}
+{% if play_in_e or play_in_w %}
     <br>
     <br>
 
     <h2>Play-In de la temporada {{var_season}}</h2>
-
-    <table>
-        <caption> <h3>Conferencia Oriental</h3> </caption>
-        <tr>
-            <th scope="col" title="Tipo">Tipo</th>
-            <th scope="col" title="Equipo">Equipo</th>
-            <th scope="col" title="Resultado">Resultado</th>
-            <th scope="col" title="Equipo">Equipo</th>
-        </tr>
-        {% for p in play_in_e %}
+    {% if play_in_e %}
+        <table>
+            <caption> <h3>Conferencia Oriental</h3> </caption>
             <tr>
-                <td>{{p.4}}</td>
-
-                {% if p.2 > p.3 %}
-                    <td><b>{{p.0.name}}</b></td>
-                {% else %}
-                    <td>{{p.0.name}}</td>
-                {% endif %}
-
-                {% if p.2 > p.3 %}
-                    <td><b>{{p.2}}</b> - {{p.3}}</td>
-                {% else %}
-                    <td>{{p.2}} - <b>{{p.3}}</b></td>
-                {% endif %}
-
-                {% if p.3 > p.2 %}
-                    <td><b>{{p.1.name}}</b></td>
-                {% else %}
-                    <td>{{p.1.name}}</td>
-                {% endif %}
+                <th scope="col" title="Tipo">Tipo</th>
+                <th scope="col" title="Equipo">Equipo</th>
+                <th scope="col" title="Resultado">Resultado</th>
+                <th scope="col" title="Equipo">Equipo</th>
             </tr>
-        {% endfor %}
-    </table>
+            {% for p in play_in_e %}
+                <tr>
+                    <td>{{p.4}}</td>
 
-    <br>
+                    {% if p.2 > p.3 %}
+                        <td><b>{{p.0.name}}</b></td>
+                    {% else %}
+                        <td>{{p.0.name}}</td>
+                    {% endif %}
 
-    <table>
-        <caption> <h3>Conferencia Occidental</h3> </caption>
-        <tr>
-            <th scope="col" title="Tipo">Tipo</th>
-            <th scope="col" title="Equipo">Equipo</th>
-            <th scope="col" title="Resultado">Resultado</th>
-            <th scope="col" title="Equipo">Equipo</th>
-        </tr>
-        {% for p in play_in_w %}
+                    {% if p.2 > p.3 %}
+                        <td><b>{{p.2}}</b> - {{p.3}}</td>
+                    {% else %}
+                        <td>{{p.2}} - <b>{{p.3}}</b></td>
+                    {% endif %}
+
+                    {% if p.3 > p.2 %}
+                        <td><b>{{p.1.name}}</b></td>
+                    {% else %}
+                        <td>{{p.1.name}}</td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+    {% if play_in_w %}
+        <br>
+
+        <table>
+            <caption> <h3>Conferencia Occidental</h3> </caption>
             <tr>
-                <td>{{p.4}}</td>
-
-                {% if p.2 > p.3 %}
-                    <td><b>{{p.0.name}}</b></td>
-                {% else %}
-                    <td>{{p.0.name}}</td>
-                {% endif %}
-
-                {% if p.2 > p.3 %}
-                    <td><b>{{p.2}}</b> - {{p.3}}</td>
-                {% else %}
-                    <td>{{p.2}} - <b>{{p.3}}</b></td>
-                {% endif %}
-
-                {% if p.3 > p.2 %}
-                    <td><b>{{p.1.name}}</b></td>
-                {% else %}
-                    <td>{{p.1.name}}</td>
-                {% endif %}
+                <th scope="col" title="Tipo">Tipo</th>
+                <th scope="col" title="Equipo">Equipo</th>
+                <th scope="col" title="Resultado">Resultado</th>
+                <th scope="col" title="Equipo">Equipo</th>
             </tr>
-        {% endfor %}
-    </table>
+            {% for p in play_in_w %}
+                <tr>
+                    <td>{{p.4}}</td>
+
+                    {% if p.2 > p.3 %}
+                        <td><b>{{p.0.name}}</b></td>
+                    {% else %}
+                        <td>{{p.0.name}}</td>
+                    {% endif %}
+
+                    {% if p.2 > p.3 %}
+                        <td><b>{{p.2}}</b> - {{p.3}}</td>
+                    {% else %}
+                        <td>{{p.2}} - <b>{{p.3}}</b></td>
+                    {% endif %}
+
+                    {% if p.3 > p.2 %}
+                        <td><b>{{p.1.name}}</b></td>
+                    {% else %}
+                        <td>{{p.1.name}}</td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
 {% endif %}
 
 
