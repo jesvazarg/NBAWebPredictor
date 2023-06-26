@@ -519,41 +519,43 @@ def standings(request, season_id: str = None):
             three_e = None
             four_e = None
             if seven_e is not None and eight_e is not None:
-                one_e_victory = num_victory(months, eastern_teams[0], eight_e, "POER")
-                eight_e_victory = num_victory(months, eight_e, eastern_teams[0], "POER")
-                if one_e_victory > 0 or eight_e_victory > 0:
-                    fr_play_off.append([eastern_teams[0], eight_e, one_e_victory, eight_e_victory, "Oriental"])
-                    if one_e_victory > eight_e_victory:
-                        one_e = eastern_teams[0]
-                    else:
-                        one_e = eight_e
-        
-                four_e_victory = num_victory(months, eastern_teams[3], eastern_teams[4], "POER")
-                five_e_victory = num_victory(months, eastern_teams[4], eastern_teams[3], "POER")
-                if four_e_victory > 0 or five_e_victory > 0:
-                    fr_play_off.append([eastern_teams[3], eastern_teams[4], four_e_victory, five_e_victory, "Oriental"])
-                    if four_e_victory > five_e_victory:
-                        four_e = eastern_teams[3]
-                    else:
-                        four_e = eastern_teams[4]
-        
-                three_e_victory = num_victory(months, eastern_teams[2], eastern_teams[5], "POER")
-                six_e_victory = num_victory(months, eastern_teams[5], eastern_teams[2], "POER")
-                if three_e_victory > 0 or six_e_victory > 0:
-                    fr_play_off.append([eastern_teams[2], eastern_teams[5], three_e_victory, six_e_victory, "Oriental"])
-                    if three_e_victory > six_e_victory:
-                        three_e = eastern_teams[2]
-                    else:
-                        three_e = eastern_teams[5]
-        
-                two_e_victory = num_victory(months, eastern_teams[1], seven_e, "POER")
-                seven_e_victory = num_victory(months, seven_e, eastern_teams[1], "POER")
-                if two_e_victory > 0 or seven_e_victory > 0:
-                    fr_play_off.append([eastern_teams[1], seven_e, two_e_victory, seven_e_victory, "Oriental"])
-                    if two_e_victory > seven_e_victory:
-                        two_e = eastern_teams[1]
-                    else:
-                        two_e = seven_e
+                seven_e = eastern_teams[6]
+                eight_e = eastern_teams[7]
+            one_e_victory = num_victory(months, eastern_teams[0], eight_e, "POER")
+            eight_e_victory = num_victory(months, eight_e, eastern_teams[0], "POER")
+            if one_e_victory > 0 or eight_e_victory > 0:
+                fr_play_off.append([eastern_teams[0], eight_e, one_e_victory, eight_e_victory, "Oriental"])
+                if one_e_victory > eight_e_victory:
+                    one_e = eastern_teams[0]
+                else:
+                    one_e = eight_e
+    
+            four_e_victory = num_victory(months, eastern_teams[3], eastern_teams[4], "POER")
+            five_e_victory = num_victory(months, eastern_teams[4], eastern_teams[3], "POER")
+            if four_e_victory > 0 or five_e_victory > 0:
+                fr_play_off.append([eastern_teams[3], eastern_teams[4], four_e_victory, five_e_victory, "Oriental"])
+                if four_e_victory > five_e_victory:
+                    four_e = eastern_teams[3]
+                else:
+                    four_e = eastern_teams[4]
+    
+            three_e_victory = num_victory(months, eastern_teams[2], eastern_teams[5], "POER")
+            six_e_victory = num_victory(months, eastern_teams[5], eastern_teams[2], "POER")
+            if three_e_victory > 0 or six_e_victory > 0:
+                fr_play_off.append([eastern_teams[2], eastern_teams[5], three_e_victory, six_e_victory, "Oriental"])
+                if three_e_victory > six_e_victory:
+                    three_e = eastern_teams[2]
+                else:
+                    three_e = eastern_teams[5]
+    
+            two_e_victory = num_victory(months, eastern_teams[1], seven_e, "POER")
+            seven_e_victory = num_victory(months, seven_e, eastern_teams[1], "POER")
+            if two_e_victory > 0 or seven_e_victory > 0:
+                fr_play_off.append([eastern_teams[1], seven_e, two_e_victory, seven_e_victory, "Oriental"])
+                if two_e_victory > seven_e_victory:
+                    two_e = eastern_teams[1]
+                else:
+                    two_e = seven_e
         
             # First Round Play-Off Western
             one_w = None
@@ -561,41 +563,43 @@ def standings(request, season_id: str = None):
             three_w = None
             four_w = None
             if seven_w is not None and eight_w is not None:
-                one_w_victory = num_victory(months, western_teams[0], eight_w, "POWR")
-                eight_w_victory = num_victory(months, eight_w, western_teams[0], "POWR")
-                if one_w_victory > 0 or eight_w_victory > 0:
-                    fr_play_off.append([western_teams[0], eight_w, one_w_victory, eight_w_victory, "Occidental"])
-                    if one_w_victory > eight_w_victory:
-                        one_w = western_teams[0]
-                    else:
-                        one_w = eight_w
-        
-                four_w_victory = num_victory(months, western_teams[3], western_teams[4], "POWR")
-                five_w_victory = num_victory(months, western_teams[4], western_teams[3], "POWR")
-                if four_w_victory > 0 or five_w_victory > 0:
-                    fr_play_off.append([western_teams[3], western_teams[4], four_w_victory, five_w_victory, "Occidental"])
-                    if four_w_victory > five_w_victory:
-                        four_w = western_teams[3]
-                    else:
-                        four_w = western_teams[4]
-        
-                three_w_victory = num_victory(months, western_teams[2], western_teams[5], "POWR")
-                six_w_victory = num_victory(months, western_teams[5], western_teams[2], "POWR")
-                if three_w_victory > 0 or six_w_victory > 0:
-                    fr_play_off.append([western_teams[2], western_teams[5], three_w_victory, six_w_victory, "Occidental"])
-                    if three_w_victory > six_w_victory:
-                        three_w = western_teams[2]
-                    else:
-                        three_w = western_teams[5]
-        
-                two_w_victory = num_victory(months, western_teams[1], seven_w, "POWR")
-                seven_w_victory = num_victory(months, seven_w, western_teams[1], "POWR")
-                if two_w_victory > 0 or seven_w_victory > 0:
-                    fr_play_off.append([western_teams[1], seven_w, two_w_victory, seven_w_victory, "Occidental"])
-                    if two_w_victory > seven_w_victory:
-                        two_w = western_teams[1]
-                    else:
-                        two_w = seven_w
+                seven_w = western_teams[6]
+                eight_w = western_teams[7]
+            one_w_victory = num_victory(months, western_teams[0], eight_w, "POWR")
+            eight_w_victory = num_victory(months, eight_w, western_teams[0], "POWR")
+            if one_w_victory > 0 or eight_w_victory > 0:
+                fr_play_off.append([western_teams[0], eight_w, one_w_victory, eight_w_victory, "Occidental"])
+                if one_w_victory > eight_w_victory:
+                    one_w = western_teams[0]
+                else:
+                    one_w = eight_w
+    
+            four_w_victory = num_victory(months, western_teams[3], western_teams[4], "POWR")
+            five_w_victory = num_victory(months, western_teams[4], western_teams[3], "POWR")
+            if four_w_victory > 0 or five_w_victory > 0:
+                fr_play_off.append([western_teams[3], western_teams[4], four_w_victory, five_w_victory, "Occidental"])
+                if four_w_victory > five_w_victory:
+                    four_w = western_teams[3]
+                else:
+                    four_w = western_teams[4]
+    
+            three_w_victory = num_victory(months, western_teams[2], western_teams[5], "POWR")
+            six_w_victory = num_victory(months, western_teams[5], western_teams[2], "POWR")
+            if three_w_victory > 0 or six_w_victory > 0:
+                fr_play_off.append([western_teams[2], western_teams[5], three_w_victory, six_w_victory, "Occidental"])
+                if three_w_victory > six_w_victory:
+                    three_w = western_teams[2]
+                else:
+                    three_w = western_teams[5]
+    
+            two_w_victory = num_victory(months, western_teams[1], seven_w, "POWR")
+            seven_w_victory = num_victory(months, seven_w, western_teams[1], "POWR")
+            if two_w_victory > 0 or seven_w_victory > 0:
+                fr_play_off.append([western_teams[1], seven_w, two_w_victory, seven_w_victory, "Occidental"])
+                if two_w_victory > seven_w_victory:
+                    two_w = western_teams[1]
+                else:
+                    two_w = seven_w
         
             # Semifinal Play-Off Eastern
             if one_e is not None and two_e is not None and three_e is not None and four_e is not None:
