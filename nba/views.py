@@ -518,9 +518,9 @@ def standings(request, season_id: str = None):
             two_e = None
             three_e = None
             four_e = None
-            if seven_e is not None:
+            if seven_e is None:
                 seven_e = eastern_teams[6]
-            if eight_e is not None:
+            if eight_e is None:
                 eight_e = eastern_teams[7]
             one_e_victory = num_victory(months, eastern_teams[0], eight_e, "POER")
             eight_e_victory = num_victory(months, eight_e, eastern_teams[0], "POER")
@@ -563,9 +563,9 @@ def standings(request, season_id: str = None):
             two_w = None
             three_w = None
             four_w = None
-            if seven_w is not None:
+            if seven_w is None:
                 seven_w = western_teams[6]
-            if eight_w is not None:
+            if eight_w is None:
                 eight_w = western_teams[7]
             one_w_victory = num_victory(months, western_teams[0], eight_w, "POWR")
             eight_w_victory = num_victory(months, eight_w, western_teams[0], "POWR")
