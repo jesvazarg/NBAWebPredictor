@@ -41,7 +41,7 @@
         <tr>
             <th scope="col" title="Temporada">Temporada</th>
             <th scope="col" title="Equipo">Equipo</th>
-            <th scope="col" title="Puntos">PTS</th>
+            <th scope="col" title="Puntos por partido">PTS/p</th>
             <th scope="col" title="Partidos">P</th>
             <th scope="col" title="3 puntos">3P</th>
             <th scope="col" title="Intentos de 3 puntos">3PI</th>
@@ -64,7 +64,7 @@
             <tr>
                 <td><b>{{max_season}}</b></td>
                 <td>{{player.team.name}}</td>
-                <td>{{player.point}}</td>
+                <td>{{player.point|divide:player.game|floatformat:"-2"}}</td>
                 <td>{{player.game}}</td>
                 <td>{{player.tp}}</td>
                 <td>{{player.tpa}}</td>
@@ -88,7 +88,7 @@
         <tr>
             <td><b>{{player_hist.season.name}}</b></td>
             <td>{{player_hist.team.name}}</td>
-            <td>{{player_hist.point}}</td>
+            <td>{{player_hist.point|divide:player_hist.game|floatformat:"-2"}}</td>
             <td>{{player_hist.game}}</td>
             <td>{{player_hist.tp}}</td>
             <td>{{player_hist.tpa}}</td>
