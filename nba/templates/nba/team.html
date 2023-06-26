@@ -30,7 +30,7 @@
         <caption> <h3><b>Estadísticas</b></h3> </caption>
         <tr>
             <th scope="col" title="Temporada">Temporada</th>
-            <th scope="col" title="Puntos">PTS</th>
+            <th scope="col" title="Puntos por partido">PTS/p</th>
             <th scope="col" title="Partidos">P</th>
             <th scope="col" title="Victorias">V</th>
             <th scope="col" title="Derrotas">D</th>
@@ -53,7 +53,7 @@
         </tr>
         <tr>
             <td><b>{{max_season}}</b></td>
-            <td>{{team.point}}</td>
+            <td>{{team.point|divide:team.game|floatformat:"-2"}}</td>
             <td>{{team.game}}</td>
             <td>{{team.victory}}</td>
             <td>{{team.defeat}}</td>
@@ -77,7 +77,7 @@
         {% for team_hist in team_hist_list %}
         <tr>
             <td><b>{{team_hist.season.name}}</b></td>
-            <td>{{team_hist.point}}</td>
+            <td>{{team_hist.point|divide:team_hist.game|floatformat:"-2"}}</td>
             <td>{{team_hist.game}}</td>
             <td>{{team_hist.victory}}</td>
             <td>{{team_hist.defeat}}</td>
