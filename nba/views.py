@@ -776,16 +776,18 @@ def standings(request, season_id: str = None):
                         else:
                             one_e = two_e
                 elif len(poef_teams) > 0:
-                    games = games_poef.filter(visitor_team_id=poef_teams[0].id)
-                    if len(games) > 0:
-                        visitor_team_victory = num_victory(months, games[0].visitor_team, games[0].home_team,
-                                                           "POEF")
-                        home_team_victory = num_victory(months, games[0].home_team, games[0].visitor_team,
-                                                        "POEF")
-                        f_play_off.append([games[0].visitor_team, games[0].home_team, visitor_team_victory,
-                                           home_team_victory, "Oriental"])
-                        extra_teams_e.append(games[0].visitor_team)
-                        extra_teams_e.append(games[0].home_team)
+                    for team in poef_teams:
+                        games = games_poef.filter(visitor_team_id=team.id)
+                        if len(games) > 0:
+                            visitor_team_victory = num_victory(months, games[0].visitor_team, games[0].home_team,
+                                                               "POEF")
+                            home_team_victory = num_victory(months, games[0].home_team, games[0].visitor_team,
+                                                            "POEF")
+                            f_play_off.append([games[0].visitor_team, games[0].home_team, visitor_team_victory,
+                                               home_team_victory, "Oriental"])
+                            extra_teams_e.append(games[0].visitor_team)
+                            extra_teams_e.append(games[0].home_team)
+                            break
 
             # Final Play-Off Western
             games_powf = Game.objects.filter(season_month_id__in=months).filter(type="POWF")
@@ -810,16 +812,18 @@ def standings(request, season_id: str = None):
                         else:
                             one_w = two_w
                 elif len(powf_teams) > 0:
-                    games = games_powf.filter(visitor_team_id=poef_teams[0].id)
-                    if len(games) > 0:
-                        visitor_team_victory = num_victory(months, games[0].visitor_team, games[0].home_team,
-                                                           "POWF")
-                        home_team_victory = num_victory(months, games[0].home_team, games[0].visitor_team,
-                                                        "POWF")
-                        f_play_off.append([games[0].visitor_team, games[0].home_team, visitor_team_victory,
-                                           home_team_victory, "Occidental"])
-                        extra_teams_w.append(games[0].visitor_team)
-                        extra_teams_w.append(games[0].home_team)
+                    for team in powf_teams:
+                        games = games_powf.filter(visitor_team_id=team.id)
+                        if len(games) > 0:
+                            visitor_team_victory = num_victory(months, games[0].visitor_team, games[0].home_team,
+                                                               "POWF")
+                            home_team_victory = num_victory(months, games[0].home_team, games[0].visitor_team,
+                                                            "POWF")
+                            f_play_off.append([games[0].visitor_team, games[0].home_team, visitor_team_victory,
+                                               home_team_victory, "Occidental"])
+                            extra_teams_w.append(games[0].visitor_team)
+                            extra_teams_w.append(games[0].home_team)
+                            break
 
             # Final Play-Off
             games_pof = Game.objects.filter(season_month_id__in=months).filter(type="POF")
@@ -838,15 +842,17 @@ def standings(request, season_id: str = None):
                     one_w_victory = num_victory(months, one_w, one_e, "POF")
                     if one_e_victory > 0 or one_w_victory > 0:
                         ff_play_off.append([one_e, one_w, one_e_victory, one_w_victory])
-                elif len(powf_teams) > 0:
-                    games = games_pof.filter(visitor_team_id=poef_teams[0].id)
-                    if len(games) > 0:
-                        visitor_team_victory = num_victory(months, games[0].visitor_team, games[0].home_team,
-                                                           "POF")
-                        home_team_victory = num_victory(months, games[0].home_team, games[0].visitor_team,
-                                                        "POF")
-                        ff_play_off.append([games[0].visitor_team, games[0].home_team, visitor_team_victory,
-                                           home_team_victory])
+                elif len(pof_teams) > 0:
+                    for team in pof_teams:
+                    games = games_pof.filter(visitor_team_id=team.id)
+                        if len(games) > 0:
+                            visitor_team_victory = num_victory(months, games[0].visitor_team, games[0].home_team,
+                                                               "POF")
+                            home_team_victory = num_victory(months, games[0].home_team, games[0].visitor_team,
+                                                            "POF")
+                            ff_play_off.append([games[0].visitor_team, games[0].home_team, visitor_team_victory,
+                                               home_team_victory])
+                            break
 
     return render(request, 'nba/standings.html', {'eastern_teams': eastern_teams, 'western_teams': western_teams,
                                                   'seasons': seasons, 'var_season': var_season,
