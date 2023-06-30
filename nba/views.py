@@ -662,27 +662,30 @@ def standings(request, season_id: str = None):
                 poes_teams = [i for i in poes_teams if i]
                 poes_teams.extend(extra_teams_e)
 
-                one_e_victory = num_victory(months, one_e, four_e, "POES")
-                four_e_victory = num_victory(months, four_e, one_e, "POES")
-                if one_e_victory > 0 or four_e_victory > 0:
-                    sf_play_off.append([one_e, four_e, one_e_victory, four_e_victory, "Oriental"])
-                    poes_teams.remove(one_e)
-                    poes_teams.remove(four_e)
-                    if one_e_victory > four_e_victory:
-                        one_e = one_e
-                    else:
-                        one_e = four_e
+                if one_e is not None and four_e is not None:
+                    one_e_victory = num_victory(months, one_e, four_e, "POES")
+                    four_e_victory = num_victory(months, four_e, one_e, "POES")
+                    if one_e_victory > 0 or four_e_victory > 0:
+                        sf_play_off.append([one_e, four_e, one_e_victory, four_e_victory, "Oriental"])
+                        poes_teams.remove(one_e)
+                        poes_teams.remove(four_e)
+                        if one_e_victory > four_e_victory:
+                            one_e = one_e
+                        else:
+                            one_e = four_e
 
-                three_e_victory = num_victory(months, three_e, two_e, "POES")
-                two_e_victory = num_victory(months, two_e, three_e, "POES")
-                if three_e_victory > 0 or two_e_victory > 0:
-                    sf_play_off.append([three_e, two_e, three_e_victory, two_e_victory, "Oriental"])
-                    poes_teams.remove(two_e)
-                    poes_teams.remove(three_e)
-                    if three_e_victory > two_e_victory:
-                        two_e = three_e
-                    else:
-                        two_e = two_e
+                if two_e is not None and three_e is not None:
+                    three_e_victory = num_victory(months, three_e, two_e, "POES")
+                    two_e_victory = num_victory(months, two_e, three_e, "POES")
+                    if three_e_victory > 0 or two_e_victory > 0:
+                        sf_play_off.append([three_e, two_e, three_e_victory, two_e_victory, "Oriental"])
+                        poes_teams.remove(two_e)
+                        poes_teams.remove(three_e)
+                        if three_e_victory > two_e_victory:
+                            two_e = three_e
+                        else:
+                            two_e = two_e
+
                 extra_teams_e = []
                 if len(poes_teams) > 0:
                     for team in poes_teams:
@@ -705,23 +708,29 @@ def standings(request, season_id: str = None):
                 pows_teams = [i for i in pows_teams if i]
                 pows_teams.extend(extra_teams_w)
 
-                one_w_victory = num_victory(months, one_w, four_w, "POWS")
-                four_w_victory = num_victory(months, four_w, one_w, "POWS")
-                if one_w_victory > 0 or four_w_victory > 0:
-                    sf_play_off.append([one_w, four_w, one_w_victory, four_w_victory, "Occidental"])
-                    if one_w_victory > four_w_victory:
-                        one_w = one_w
-                    else:
-                        one_w = four_w
+                if one_w is not None and four_w is not None:
+                    one_w_victory = num_victory(months, one_w, four_w, "POWS")
+                    four_w_victory = num_victory(months, four_w, one_w, "POWS")
+                    if one_w_victory > 0 or four_w_victory > 0:
+                        sf_play_off.append([one_w, four_w, one_w_victory, four_w_victory, "Occidental"])
+                        poes_teams.remove(one_w)
+                        poes_teams.remove(four_w)
+                        if one_w_victory > four_w_victory:
+                            one_w = one_w
+                        else:
+                            one_w = four_w
 
-                three_w_victory = num_victory(months, three_w, two_w, "POWS")
-                two_w_victory = num_victory(months, two_w, three_w, "POWS")
-                if three_w_victory > 0 or two_w_victory > 0:
-                    sf_play_off.append([three_w, two_w, three_w_victory, two_w_victory, "Occidental"])
-                    if three_w_victory > two_w_victory:
-                        two_w = three_w
-                    else:
-                        two_w = two_w
+                if two_w is not None and three_w is not None:
+                    three_w_victory = num_victory(months, three_w, two_w, "POWS")
+                    two_w_victory = num_victory(months, two_w, three_w, "POWS")
+                    if three_w_victory > 0 or two_w_victory > 0:
+                        sf_play_off.append([three_w, two_w, three_w_victory, two_w_victory, "Occidental"])
+                        poes_teams.remove(two_w)
+                        poes_teams.remove(three_w)
+                        if three_w_victory > two_w_victory:
+                            two_w = three_w
+                        else:
+                            two_w = two_w
 
                 extra_teams_w = []
                 if len(pows_teams) > 0:
@@ -746,14 +755,15 @@ def standings(request, season_id: str = None):
                 poef_teams.extend(extra_teams_e)
                 extra_teams_e = []
 
-                one_e_victory = num_victory(months, one_e, two_e, "POEF")
-                two_e_victory = num_victory(months, two_e, one_e, "POEF")
-                if one_e_victory > 0 or two_e_victory > 0:
-                    f_play_off.append([one_e, two_e, one_e_victory, two_e_victory, "Oriental"])
-                    if one_e_victory > two_e_victory:
-                        one_e = one_e
-                    else:
-                        one_e = two_e
+                if one_e is not None and two_e is not None:
+                    one_e_victory = num_victory(months, one_e, two_e, "POEF")
+                    two_e_victory = num_victory(months, two_e, one_e, "POEF")
+                    if one_e_victory > 0 or two_e_victory > 0:
+                        f_play_off.append([one_e, two_e, one_e_victory, two_e_victory, "Oriental"])
+                        if one_e_victory > two_e_victory:
+                            one_e = one_e
+                        else:
+                            one_e = two_e
                 elif len(poef_teams) > 0:
                     games = games_poef.filter(visitor_team_id=poef_teams[0].id)
                     if len(games) > 0:
@@ -774,14 +784,15 @@ def standings(request, season_id: str = None):
                 powf_teams.extend(extra_teams_w)
                 extra_teams_w = []
 
-                one_w_victory = num_victory(months, one_w, two_w, "POWF")
-                two_w_victory = num_victory(months, two_w, one_w, "POWF")
-                if one_w_victory > 0 or two_w_victory > 0:
-                    f_play_off.append([one_w, two_w, one_w_victory, two_w_victory, "Occidental"])
-                    if one_w_victory > two_w_victory:
-                        one_w = one_w
-                    else:
-                        one_w = two_w
+                if one_w is not None and two_w is not None:
+                    one_w_victory = num_victory(months, one_w, two_w, "POWF")
+                    two_w_victory = num_victory(months, two_w, one_w, "POWF")
+                    if one_w_victory > 0 or two_w_victory > 0:
+                        f_play_off.append([one_w, two_w, one_w_victory, two_w_victory, "Occidental"])
+                        if one_w_victory > two_w_victory:
+                            one_w = one_w
+                        else:
+                            one_w = two_w
                 elif len(powf_teams) > 0:
                     games = games_powf.filter(visitor_team_id=poef_teams[0].id)
                     if len(games) > 0:
@@ -802,10 +813,11 @@ def standings(request, season_id: str = None):
                 pof_teams.extend(extra_teams_e)
                 pof_teams.extend(extra_teams_w)
 
-                one_e_victory = num_victory(months, one_e, one_w, "POF")
-                one_w_victory = num_victory(months, one_w, one_e, "POF")
-                if one_e_victory > 0 or one_w_victory > 0:
-                    ff_play_off.append([one_e, one_w, one_e_victory, one_w_victory])
+                if one_e is not None and one_w is not None:
+                    one_e_victory = num_victory(months, one_e, one_w, "POF")
+                    one_w_victory = num_victory(months, one_w, one_e, "POF")
+                    if one_e_victory > 0 or one_w_victory > 0:
+                        ff_play_off.append([one_e, one_w, one_e_victory, one_w_victory])
                 elif len(powf_teams) > 0:
                     games = games_pof.filter(visitor_team_id=poef_teams[0].id)
                     if len(games) > 0:
