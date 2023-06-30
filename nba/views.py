@@ -844,7 +844,7 @@ def standings(request, season_id: str = None):
                         ff_play_off.append([one_e, one_w, one_e_victory, one_w_victory])
                 elif len(pof_teams) > 0:
                     for team in pof_teams:
-                    games = games_pof.filter(visitor_team_id=team.id)
+                        games = games_pof.filter(visitor_team_id=team.id)
                         if len(games) > 0:
                             visitor_team_victory = num_victory(months, games[0].visitor_team, games[0].home_team,
                                                                "POF")
