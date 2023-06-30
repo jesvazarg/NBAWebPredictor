@@ -532,8 +532,8 @@ def standings(request, season_id: str = None):
                 eight_e_victory = num_victory(months, eight_e, eastern_teams[0], "POER")
                 if one_e_victory > 0 or eight_e_victory > 0:
                     fr_play_off.append([eastern_teams[0], eight_e, one_e_victory, eight_e_victory, "Oriental"])
-                    poer_teams.remove(eastern_teams[0])
-                    poer_teams.remove(eight_e)
+                    poer_teams.remove(eastern_teams[0]) if eastern_teams[0] in poer_teams else None
+                    poer_teams.remove(eight_e) if eight_e in poer_teams else None
                     if one_e_victory > eight_e_victory:
                         one_e = eastern_teams[0]
                     else:
@@ -543,8 +543,8 @@ def standings(request, season_id: str = None):
                 five_e_victory = num_victory(months, eastern_teams[4], eastern_teams[3], "POER")
                 if four_e_victory > 0 or five_e_victory > 0:
                     fr_play_off.append([eastern_teams[3], eastern_teams[4], four_e_victory, five_e_victory, "Oriental"])
-                    poer_teams.remove(eastern_teams[3])
-                    poer_teams.remove(eastern_teams[4])
+                    poer_teams.remove(eastern_teams[3]) if eastern_teams[3] in poer_teams else None
+                    poer_teams.remove(eastern_teams[4]) if eastern_teams[4] in poer_teams else None
                     if four_e_victory > five_e_victory:
                         four_e = eastern_teams[3]
                     else:
@@ -554,8 +554,8 @@ def standings(request, season_id: str = None):
                 six_e_victory = num_victory(months, eastern_teams[5], eastern_teams[2], "POER")
                 if three_e_victory > 0 or six_e_victory > 0:
                     fr_play_off.append([eastern_teams[2], eastern_teams[5], three_e_victory, six_e_victory, "Oriental"])
-                    poer_teams.remove(eastern_teams[2])
-                    poer_teams.remove(eastern_teams[5])
+                    poer_teams.remove(eastern_teams[2]) if eastern_teams[2] in poer_teams else None
+                    poer_teams.remove(eastern_teams[5]) if eastern_teams[5] in poer_teams else None
                     if three_e_victory > six_e_victory:
                         three_e = eastern_teams[2]
                     else:
@@ -565,8 +565,8 @@ def standings(request, season_id: str = None):
                 seven_e_victory = num_victory(months, seven_e, eastern_teams[1], "POER")
                 if two_e_victory > 0 or seven_e_victory > 0:
                     fr_play_off.append([eastern_teams[1], seven_e, two_e_victory, seven_e_victory, "Oriental"])
-                    poer_teams.remove(eastern_teams[1])
-                    poer_teams.remove(seven_e)
+                    poer_teams.remove(eastern_teams[1]) if eastern_teams[1] in poer_teams else None
+                    poer_teams.remove(seven_e) if seven_e in poer_teams else None
                     if two_e_victory > seven_e_victory:
                         two_e = eastern_teams[1]
                     else:
@@ -603,8 +603,8 @@ def standings(request, season_id: str = None):
                 eight_w_victory = num_victory(months, eight_w, western_teams[0], "POWR")
                 if one_w_victory > 0 or eight_w_victory > 0:
                     fr_play_off.append([western_teams[0], eight_w, one_w_victory, eight_w_victory, "Occidental"])
-                    powr_teams.remove(western_teams[0])
-                    powr_teams.remove(eight_w)
+                    powr_teams.remove(western_teams[0]) if western_teams[0] powr_teams else None
+                    powr_teams.remove(eight_w) if eight_w in powr_teams else None
                     if one_w_victory > eight_w_victory:
                         one_w = western_teams[0]
                     else:
@@ -614,8 +614,8 @@ def standings(request, season_id: str = None):
                 five_w_victory = num_victory(months, western_teams[4], western_teams[3], "POWR")
                 if four_w_victory > 0 or five_w_victory > 0:
                     fr_play_off.append([western_teams[3], western_teams[4], four_w_victory, five_w_victory, "Occidental"])
-                    powr_teams.remove(western_teams[3])
-                    powr_teams.remove(western_teams[4])
+                    powr_teams.remove(western_teams[3]) if western_teams[3] in powr_teams else None
+                    powr_teams.remove(western_teams[4]) if western_teams[4] in powr_teams else None
                     if four_w_victory > five_w_victory:
                         four_w = western_teams[3]
                     else:
@@ -625,8 +625,8 @@ def standings(request, season_id: str = None):
                 six_w_victory = num_victory(months, western_teams[5], western_teams[2], "POWR")
                 if three_w_victory > 0 or six_w_victory > 0:
                     fr_play_off.append([western_teams[2], western_teams[5], three_w_victory, six_w_victory, "Occidental"])
-                    powr_teams.remove(western_teams[2])
-                    powr_teams.remove(western_teams[5])
+                    powr_teams.remove(western_teams[2]) if western_teams[2] in powr_teams else None
+                    powr_teams.remove(western_teams[5]) if western_teams[5] in powr_teams else None
                     if three_w_victory > six_w_victory:
                         three_w = western_teams[2]
                     else:
@@ -636,8 +636,8 @@ def standings(request, season_id: str = None):
                 seven_w_victory = num_victory(months, seven_w, western_teams[1], "POWR")
                 if two_w_victory > 0 or seven_w_victory > 0:
                     fr_play_off.append([western_teams[1], seven_w, two_w_victory, seven_w_victory, "Occidental"])
-                    powr_teams.remove(western_teams[1])
-                    powr_teams.remove(seven_w)
+                    powr_teams.remove(western_teams[1]) if western_teams[1] in powr_teams else None
+                    powr_teams.remove(seven_w) if seven_w in powr_teams else None
                     if two_w_victory > seven_w_victory:
                         two_w = western_teams[1]
                     else:
@@ -667,8 +667,8 @@ def standings(request, season_id: str = None):
                     four_e_victory = num_victory(months, four_e, one_e, "POES")
                     if one_e_victory > 0 or four_e_victory > 0:
                         sf_play_off.append([one_e, four_e, one_e_victory, four_e_victory, "Oriental"])
-                        poes_teams.remove(one_e)
-                        poes_teams.remove(four_e)
+                        poes_teams.remove(one_e) if one_e in poes_teams else None
+                        poes_teams.remove(four_e) if four_e in poes_teams else None
                         if one_e_victory > four_e_victory:
                             one_e = one_e
                         else:
@@ -679,8 +679,8 @@ def standings(request, season_id: str = None):
                     two_e_victory = num_victory(months, two_e, three_e, "POES")
                     if three_e_victory > 0 or two_e_victory > 0:
                         sf_play_off.append([three_e, two_e, three_e_victory, two_e_victory, "Oriental"])
-                        poes_teams.remove(two_e)
-                        poes_teams.remove(three_e)
+                        poes_teams.remove(two_e) if two_w in poes_teams else None
+                        poes_teams.remove(three_e) if three_e in poes_teams else None
                         if three_e_victory > two_e_victory:
                             two_e = three_e
                         else:
@@ -713,8 +713,8 @@ def standings(request, season_id: str = None):
                     four_w_victory = num_victory(months, four_w, one_w, "POWS")
                     if one_w_victory > 0 or four_w_victory > 0:
                         sf_play_off.append([one_w, four_w, one_w_victory, four_w_victory, "Occidental"])
-                        poes_teams.remove(one_w)
-                        poes_teams.remove(four_w)
+                        pows_teams.remove(one_w) if one_w in pows_teams else None
+                        pows_teams.remove(four_w) if four_w in pows_teams else None
                         if one_w_victory > four_w_victory:
                             one_w = one_w
                         else:
@@ -725,8 +725,8 @@ def standings(request, season_id: str = None):
                     two_w_victory = num_victory(months, two_w, three_w, "POWS")
                     if three_w_victory > 0 or two_w_victory > 0:
                         sf_play_off.append([three_w, two_w, three_w_victory, two_w_victory, "Occidental"])
-                        poes_teams.remove(two_w)
-                        poes_teams.remove(three_w)
+                        pows_teams.remove(two_w) if two_w in pows_teams else None
+                        pows_teams.remove(three_w) if three_w in pows_teams else None
                         if three_w_victory > two_w_victory:
                             two_w = three_w
                         else:
@@ -760,6 +760,8 @@ def standings(request, season_id: str = None):
                     two_e_victory = num_victory(months, two_e, one_e, "POEF")
                     if one_e_victory > 0 or two_e_victory > 0:
                         f_play_off.append([one_e, two_e, one_e_victory, two_e_victory, "Oriental"])
+                        poef_teams.remove(one_e) if one_e in poef_teams else None
+                        poef_teams.remove(two_e) if two_e in poef_teams else None
                         if one_e_victory > two_e_victory:
                             one_e = one_e
                         else:
@@ -789,6 +791,8 @@ def standings(request, season_id: str = None):
                     two_w_victory = num_victory(months, two_w, one_w, "POWF")
                     if one_w_victory > 0 or two_w_victory > 0:
                         f_play_off.append([one_w, two_w, one_w_victory, two_w_victory, "Occidental"])
+                        powf_teams.remove(one_w) if one_w in powf_teams else None
+                        powf_teams.remove(two_w) if two_w in powf_teams else None
                         if one_w_victory > two_w_victory:
                             one_w = one_w
                         else:
