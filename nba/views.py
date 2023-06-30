@@ -842,6 +842,8 @@ def standings(request, season_id: str = None):
                     one_w_victory = num_victory(months, one_w, one_e, "POF")
                     if one_e_victory > 0 or one_w_victory > 0:
                         ff_play_off.append([one_e, one_w, one_e_victory, one_w_victory])
+                        pof_teams.remove(one_e) if one_e in pof_teams else None
+                        pof_teams.remove(one_w) if one_w in pof_teams else None
                 if len(pof_teams) > 0:
                     for team in pof_teams:
                         games = games_pof.filter(visitor_team_id=team.id)
