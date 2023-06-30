@@ -662,7 +662,8 @@ def standings(request, season_id: str = None):
                 poes_teams = [i for i in poes_teams if i]
                 print("poes_teams:", poes_teams)
                 print("extra_teams_e:", extra_teams_e)
-                poes_teams.extend(extra_teams_e)
+                for i in extra_teams_e:
+                    poes_teams.append(i) if i not in poes_teams else None
                 print("poes_teams:", poes_teams)
 
                 if one_e is not None and four_e is not None:
@@ -711,7 +712,8 @@ def standings(request, season_id: str = None):
                 pows_teams = [i for i in pows_teams if i]
                 print("pows_teams:", pows_teams)
                 print("extra_teams_w:", extra_teams_w)
-                pows_teams.extend(extra_teams_w)
+                for i in extra_teams_w:
+                    pows_teams.append(i) if i not in pows_teams else None
                 print("pows_teams:", pows_teams)
 
                 if one_w is not None and four_w is not None:
@@ -760,7 +762,8 @@ def standings(request, season_id: str = None):
                 poef_teams = [i for i in poef_teams if i]
                 print("poef_teams:", poef_teams)
                 print("extra_teams_e:", extra_teams_e)
-                poef_teams.extend(extra_teams_e)
+                for i in extra_teams_e:
+                    poef_teams.append(i) if i not in poef_teams else None
                 print("poef_teams:", poef_teams)
                 extra_teams_e = []
 
@@ -796,7 +799,8 @@ def standings(request, season_id: str = None):
                 powf_teams = [i for i in powf_teams if i]
                 print("powf_teams:", powf_teams)
                 print("extra_teams_w:", extra_teams_w)
-                powf_teams.extend(extra_teams_w)
+                for i in extra_teams_w:
+                    powf_teams.append(i) if i not in powf_teams else None
                 print("powf_teams:", powf_teams)
                 extra_teams_w = []
 
@@ -833,8 +837,10 @@ def standings(request, season_id: str = None):
                 print("pof_teams:", pof_teams)
                 print("extra_teams_e:", extra_teams_e)
                 print("extra_teams_w:", extra_teams_w)
-                pof_teams.extend(extra_teams_e)
-                pof_teams.extend(extra_teams_w)
+                for i in extra_teams_e:
+                    pof_teams.append(i) if i not in pof_teams else None
+                for i in extra_teams_w:
+                    pof_teams.append(i) if i not in pof_teams else None
                 print("pof_teams:", pof_teams)
 
                 if one_e is not None and one_w is not None:
