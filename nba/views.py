@@ -603,7 +603,7 @@ def standings(request, season_id: str = None):
                 eight_w_victory = num_victory(months, eight_w, western_teams[0], "POWR")
                 if one_w_victory > 0 or eight_w_victory > 0:
                     fr_play_off.append([western_teams[0], eight_w, one_w_victory, eight_w_victory, "Occidental"])
-                    powr_teams.remove(western_teams[0]) if western_teams[0] powr_teams else None
+                    powr_teams.remove(western_teams[0]) if western_teams[0] in powr_teams else None
                     powr_teams.remove(eight_w) if eight_w in powr_teams else None
                     if one_w_victory > eight_w_victory:
                         one_w = western_teams[0]
