@@ -682,7 +682,7 @@ def standings(request, season_id: str = None):
                     two_e_victory = num_victory(months, two_e, three_e, "POES")
                     if three_e_victory > 0 or two_e_victory > 0:
                         sf_play_off.append([three_e, two_e, three_e_victory, two_e_victory, "Oriental"])
-                        poes_teams.remove(two_e) if two_w in poes_teams else None
+                        poes_teams.remove(two_e) if two_e in poes_teams else None
                         poes_teams.remove(three_e) if three_e in poes_teams else None
                         if three_e_victory > two_e_victory:
                             two_e = three_e
@@ -756,7 +756,7 @@ def standings(request, season_id: str = None):
             # Final Play-Off Eastern
             games_poef = Game.objects.filter(season_month_id__in=months).filter(type="POEF")
             if len(games_poef) > 0:
-                poef_teams = [one_w, two_w]
+                poef_teams = [one_e, two_e]
                 poef_teams = [i for i in poef_teams if i]
                 print("poef_teams:", poef_teams)
                 print("extra_teams_e:", extra_teams_e)
