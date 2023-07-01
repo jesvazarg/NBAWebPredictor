@@ -660,11 +660,8 @@ def standings(request, season_id: str = None):
             if len(games_poes) > 0:
                 poes_teams = [one_e, two_e, three_e, four_e]
                 poes_teams = [i for i in poes_teams if i]
-                print("poes_teams:", poes_teams)
-                print("extra_teams_e:", extra_teams_e)
                 for i in extra_teams_e:
                     poes_teams.append(i) if i not in poes_teams else None
-                print("poes_teams:", poes_teams)
 
                 if one_e is not None and four_e is not None:
                     one_e_victory = num_victory(months, one_e, four_e, "POES")
@@ -710,11 +707,8 @@ def standings(request, season_id: str = None):
             if len(games_pows) > 0:
                 pows_teams = [one_w, two_w, three_w, four_w]
                 pows_teams = [i for i in pows_teams if i]
-                print("pows_teams:", pows_teams)
-                print("extra_teams_w:", extra_teams_w)
                 for i in extra_teams_w:
                     pows_teams.append(i) if i not in pows_teams else None
-                print("pows_teams:", pows_teams)
 
                 if one_w is not None and four_w is not None:
                     one_w_victory = num_victory(months, one_w, four_w, "POWS")
@@ -760,11 +754,8 @@ def standings(request, season_id: str = None):
             if len(games_poef) > 0:
                 poef_teams = [one_e, two_e]
                 poef_teams = [i for i in poef_teams if i]
-                print("poef_teams:", poef_teams)
-                print("extra_teams_e:", extra_teams_e)
                 for i in extra_teams_e:
                     poef_teams.append(i) if i not in poef_teams else None
-                print("poef_teams:", poef_teams)
                 extra_teams_e = []
 
                 if one_e is not None and two_e is not None:
@@ -797,11 +788,8 @@ def standings(request, season_id: str = None):
             if len(games_powf) > 0:
                 powf_teams = [one_w, two_w]
                 powf_teams = [i for i in powf_teams if i]
-                print("powf_teams:", powf_teams)
-                print("extra_teams_w:", extra_teams_w)
                 for i in extra_teams_w:
                     powf_teams.append(i) if i not in powf_teams else None
-                print("powf_teams:", powf_teams)
                 extra_teams_w = []
 
                 if one_w is not None and two_w is not None:
@@ -834,23 +822,19 @@ def standings(request, season_id: str = None):
             if len(games_pof) > 0:
                 pof_teams = [one_e, one_w]
                 pof_teams = [i for i in pof_teams if i]
-                print("pof_teams:", pof_teams)
-                print("extra_teams_e:", extra_teams_e)
-                print("extra_teams_w:", extra_teams_w)
                 for i in extra_teams_e:
                     pof_teams.append(i) if i not in pof_teams else None
                 for i in extra_teams_w:
                     pof_teams.append(i) if i not in pof_teams else None
-                print("pof_teams:", pof_teams)
 
                 if one_e is not None and one_w is not None:
                     one_e_victory = num_victory(months, one_e, one_w, "POF")
                     one_w_victory = num_victory(months, one_w, one_e, "POF")
                     if one_e_victory > 0 or one_w_victory > 0:
                         ff_play_off.append([one_e, one_w, one_e_victory, one_w_victory])
-                        pof_teams.remove(one_e) if one_e in pof_teams else print("No ->", one_e)
-                        pof_teams.remove(one_w) if one_w in pof_teams else print("No ->", one_w)
-                print("pof_teams:", pof_teams)
+                        pof_teams.remove(one_e) if one_e in pof_teams else None
+                        pof_teams.remove(one_w) if one_w in pof_teams else None
+                        
                 if len(pof_teams) > 0:
                     for team in pof_teams:
                         games = games_pof.filter(visitor_team_id=team.id)
